@@ -13,14 +13,12 @@ class Checkbox
     HANDLE outHandle;
 
 public:
-    Checkbox(Label label, COORD coord) : 
-        label(label), 
-        coord(coord), 
-        isChecked(true),
-        outHandle(GetStdHandle(STD_OUTPUT_HANDLE))
-    {};
+    Checkbox(COORD coord) : isChecked(true),coord(coord){};
 
-    Checkbox(COORD coord):coord(coord){};
+    Checkbox(Label label, COORD coord) : label(label),
+                                         coord(coord),
+                                         isChecked(true),
+                                         outHandle(GetStdHandle(STD_OUTPUT_HANDLE)){};
 
     void setLabel(Label label) { this->label = label; }
     Label getLabel() { return this->label; }
@@ -31,18 +29,21 @@ public:
     void setOutHandle(HANDLE nOutHandle) { this->outHandle = nOutHandle; }
     HANDLE getOutHandle() { return this->outHandle; }
 
-    void setColors(DWORD fg=0, DWORD bg = 0){
+    void setColors(DWORD fg = 0, DWORD bg = 0)
+    {
         this->colors = fg | bg;
     }
 
-    void drawLabel(){
+    void drawLabel()
+    {
         this->getLabel().draw();
-        
     }
 
-     void drawBoxArea(){
-        SetConsoleCursorPosition(this->getOutHandle(), coord);
-        SetConsoleTextAttribute(this->getOutHandle(), this->colors);
+    void drawBoxArea()
+    {
+        outHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleCursorPosition(outHandle, coord);
+        SetConsoleTextAttribute(outHandle, this->colors);
         this->isChecked ? cout << " X " : cout << " ";
-     }
+    }
 };

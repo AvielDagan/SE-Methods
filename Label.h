@@ -10,18 +10,23 @@ class Label
     string value; //name of the label
     COORD coord;  //coordinates
     DWORD colors;
+    HANDLE outHandle;
 
 public:
-    Label(string value, COORD coord) : value(value), coord(coord){};
-    Label(string value = "", COORD coord = {0,0}){};
     Label(){};
+    Label(string value, COORD coord) : value(value), coord(coord){};
+
     void setValue(string value) { this->value = value; }
     string getValue() { return this->value; }
 
     void setCoord(COORD coord) { this->coord = coord; }
     COORD getCoord() { return this->coord; }
 
-    void setColors(DWORD fg=0, DWORD bg = 0){
+    void setOutHandle(HANDLE nOutHandle) { this->outHandle = nOutHandle; }
+    HANDLE getOutHandle() { return this->outHandle; }
+
+    void setColors(DWORD fg = 0, DWORD bg = 0)
+    {
         this->colors = fg | bg;
     }
 
@@ -33,9 +38,9 @@ public:
          * 3. Hide input cursor
          */
 
-        auto outHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-        SetConsoleCursorPosition(outHandle, coord);
-        SetConsoleTextAttribute(outHandle,colors);
+        outHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleCursorPosition(this->getOutHandle(), coord);
+        SetConsoleTextAttribute(this->getOutHandle(), colors);
         cout << this->value;
     }
 };
