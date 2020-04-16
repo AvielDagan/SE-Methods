@@ -1,4 +1,3 @@
-#pragma once
 #include <string>
 #include <windows.h>
 #include <iostream>
@@ -14,6 +13,8 @@ class Label
 
 public:
     Label(string value, COORD coord) : value(value), coord(coord){};
+    Label(string value = "", COORD coord = {0,0}){};
+    Label(){};
     void setValue(string value) { this->value = value; }
     string getValue() { return this->value; }
 
@@ -36,8 +37,5 @@ public:
         SetConsoleCursorPosition(outHandle, coord);
         SetConsoleTextAttribute(outHandle,colors);
         cout << this->value;
-
-        CONSOLE_CURSOR_INFO info = {20, 0};
-        SetConsoleCursorInfo(outHandle, &info);
     }
 };
