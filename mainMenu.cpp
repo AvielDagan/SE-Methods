@@ -1,15 +1,23 @@
+#pragma once
 #include <windows.h>
 #include <stdio.h>
 #include "Label.h"
 #include "TextBox.hpp"
+#include "controller.hpp"
 
 HANDLE hStdin;
 DWORD fdwSaveOldMode;
 
+Controller mainController({5, 5});
+TextBox textbox({20, 5});
+Label labelTextBox("Text Box", {5, 5});
+Label labelCheckBox("Check Box", {5, 10});
+
 VOID ErrorExit(LPSTR);
-VOID KeyEventProc(KEY_EVENT_RECORD, TextBox);
+VOID KeyEventProc(KEY_EVENT_RECORD);
 VOID MouseEventProc(MOUSE_EVENT_RECORD);
 VOID ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD);
+void initMenu();
 
 int main(VOID)
 {
@@ -36,20 +44,9 @@ int main(VOID)
 
     // Loop to read and handle the next 100 input events.
 
-    // Wait for the events.
-    TextBox textbox(" ", {20, 10});
-    textbox.setColors(FOREGROUND_GREEN | FOREGROUND_INTENSITY, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);
-    Label label("Welcome", {5, 5});
-    label.setColors(FOREGROUND_GREEN | FOREGROUND_INTENSITY, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);
-    label.draw();
 
-    Label label1("Enter Val", {5, 10});
-    label1.setColors(FOREGROUND_GREEN | FOREGROUND_INTENSITY, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);
-    label1.draw();
-
-    Label label2("CheckBox", {5, 15});
-    label2.setColors(FOREGROUND_GREEN | FOREGROUND_INTENSITY, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);
-    label2.draw();
+    // set init options and print menu  
+    initMenu();
 
     // Dispatch the events to the appropriate handler.
     while (1)
@@ -66,7 +63,7 @@ int main(VOID)
             switch (irInBuf[i].EventType)
             {
             case KEY_EVENT: // keyboard input
-                KeyEventProc(irInBuf[i].Event.KeyEvent, textbox);
+                KeyEventProc(irInBuf[i].Event.KeyEvent);
                 break;
 
             case MOUSE_EVENT: // mouse input
@@ -106,7 +103,7 @@ VOID ErrorExit(LPSTR lpszMessage)
     ExitProcess(0);
 }
 
-VOID KeyEventProc(KEY_EVENT_RECORD ker, TextBox textbox)
+VOID KeyEventProc(KEY_EVENT_RECORD ker)
 {
 
     if (ker.bKeyDown) // if key pressed
@@ -115,11 +112,65 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker, TextBox textbox)
         {
         case VK_LEFT:
             // printf("LEFT ARROW key");
-            textbox.draw();
+            // textbox.draw();
             break;
 
         case VK_RIGHT:
             // printf("RIGHT ARROW key");
+            break;
+
+        case VK_TAB:
+            switch (mainController.getCurrCord().Y)
+            {
+            case TEXT_BOX_Y_POSITION:
+                textbox.drawInputArea();
+                textbox.drawInput(mainController.getCurrCord().Y);
+                break;
+
+            case CHECK_BOX_Y_POSITION:
+                //    checkBox.draw();
+                break;
+
+            default:
+                break;
+            }
+            // return;
+
+            break;
+        case VK_UP:
+            // printf("RIGHT ARROW key");
+            switch (mainController.getCurrCord().Y)
+            {
+            case 10:
+
+                labelCheckBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+                labelTextBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
+                labelTextBox.draw();
+                labelCheckBox.draw();
+                mainController.setCurrCord({MENU_X_JUMP, (mainController.getCurrCord().Y) - MENU_Y_JUMP});
+                break;
+
+            default:
+                break;
+            }
+            break;
+
+        case VK_DOWN:
+            // cout << ;
+            switch (mainController.getCurrCord().Y)
+            {
+            case 5:
+                labelTextBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+                labelCheckBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
+                labelTextBox.draw();
+                labelCheckBox.draw();
+                mainController.setCurrCord({MENU_X_JUMP, (mainController.getCurrCord().Y) + MENU_Y_JUMP});
+                break;
+
+            default:
+                break;
+            }
+
             break;
         default:
             break;
@@ -173,6 +224,22 @@ VOID MouseEventProc(MOUSE_EVENT_RECORD mer)
 
 VOID ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr)
 {
-    printf("Resize event\n");
-    printf("Console screen buffer is %d columns by %d rows.\n", wbsr.dwSize.X, wbsr.dwSize.Y);
+    // printf("Resize event\n");
+    // printf("Console screen buffer is %d columns by %d rows.\n", wbsr.dwSize.X, wbsr.dwSize.Y);
+}
+
+void initMenu()
+{
+    Label label("Welcome :)", {20, 0}); // label indicate
+    label.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+    label.draw();
+
+    textbox.setColors(BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);
+    textbox.drawInputArea();
+
+    labelTextBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY,BACKGROUND_INTENSITY);
+    labelTextBox.draw();
+
+    labelCheckBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+    labelCheckBox.draw();
 }

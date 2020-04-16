@@ -1,0 +1,5 @@
+#define MENU_X_JUMP 5
+#define MENU_Y_JUMP 5
+#define TEXT_BOX_Y_POSITION 5
+#define CHECK_BOX_Y_POSITION 10
+#define OFFEST_LABLES_INPUT 20

@@ -1,6 +1,8 @@
+#pragma once
 #include <string>
 #include <windows.h>
 #include <iostream>
+#include "defindes.hpp"
 
 using namespace std;
 
@@ -18,7 +20,7 @@ public:
     void setCoord(COORD coord) { this->coord = coord; }
     COORD getCoord() { return this->coord; }
 
-    void setColors(DWORD fg, DWORD bg){
+    void setColors(DWORD fg=0, DWORD bg = 0){
         this->colors = fg | bg;
     }
 
@@ -35,7 +37,7 @@ public:
         SetConsoleTextAttribute(outHandle,colors);
         cout << this->value;
 
-        CONSOLE_CURSOR_INFO info = {20, 1};
+        CONSOLE_CURSOR_INFO info = {20, 0};
         SetConsoleCursorInfo(outHandle, &info);
     }
 };
