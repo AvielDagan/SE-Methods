@@ -230,7 +230,7 @@ VOID ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr)
 
 void initMenu()
 {
-    Label label("Welcome :)", {20, 0}); // label indicate
+    Label label("Welcome :)", {OFFEST_LABLES_INPUT, 0}); // label indicate
     label.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
     label.draw();
 
