@@ -35,7 +35,7 @@ public:
         SetConsoleTextAttribute(outHandle,colors);
         cout << this->value;
 
-        CONSOLE_CURSOR_INFO info = {100, 1};
+        CONSOLE_CURSOR_INFO info = {20, 1};
         SetConsoleCursorInfo(outHandle, &info);
     }
 };
