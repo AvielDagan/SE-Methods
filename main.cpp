@@ -120,8 +120,8 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker)
             {
                 insideCheckBox = false;
                 labelCheckBox.setColors(WHITE_FOREGROUND_COLOR, SELECTED_BACKGROUND);
-                checkbox1.setColors(0,WHITE_BACKGROUND_COLOR);
-                checkbox2.setColors(0,WHITE_BACKGROUND_COLOR);
+                checkbox1.setColors(0, WHITE_BACKGROUND_COLOR);
+                checkbox2.setColors(0, WHITE_BACKGROUND_COLOR);
                 checkbox1.drawBoxArea();
                 checkbox2.drawBoxArea();
                 labelCheckBox.draw();
@@ -145,7 +145,7 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker)
                 labelCheckBox.setColors(WHITE_FOREGROUND_COLOR);
                 labelCheckBox.draw();
                 checkbox1.drawOnPress(mainController.getCurrCord().Y);
-                checkbox1.setColors(0,SELECTED_BACKGROUND);
+                checkbox1.setColors(0, SELECTED_BACKGROUND);
                 checkbox1.drawBoxArea();
                 insideCheckBox = true;
                 break;
@@ -172,9 +172,9 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker)
                 if (insideCheckBox)
                 {
                     mainController.setCurrCord({MENU_X_JUMP, (mainController.getCurrCord().Y) - MENU_Y_JUMP});
-                    checkbox2.setColors(0,WHITE_BACKGROUND_COLOR); //Unselected box - white
+                    checkbox2.setColors(0, WHITE_BACKGROUND_COLOR); //Unselected box - white
                     checkbox2.drawBoxArea();
-                    checkbox1.setColors(0,SELECTED_BACKGROUND); //selected box - grey
+                    checkbox1.setColors(0, SELECTED_BACKGROUND); //selected box - grey
                     checkbox1.drawBoxArea();
                 }
             default:
@@ -199,9 +199,9 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker)
                 if (insideCheckBox)
                 {
                     mainController.setCurrCord({MENU_X_JUMP, (mainController.getCurrCord().Y) + MENU_Y_JUMP});
-                    checkbox1.setColors(0,WHITE_BACKGROUND_COLOR); //Unselected box - white
+                    checkbox1.setColors(0, WHITE_BACKGROUND_COLOR); //Unselected box - white
                     checkbox1.drawBoxArea();
-                    checkbox2.setColors(0,SELECTED_BACKGROUND); //Selected box - grey
+                    checkbox2.setColors(0, SELECTED_BACKGROUND); //Selected box - grey
                     checkbox2.drawBoxArea();
                 }
             default:
@@ -235,12 +235,10 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker)
         default:
             break;
         }
-
     }
 }
 
-
-VOID ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr) // for future planning 
+VOID ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr) // for future planning
 {
     // printf("Resize event\n");
     // printf("Console screen buffer is %d columns by %d rows.\n", wbsr.dwSize.X, wbsr.dwSize.Y);
@@ -248,15 +246,24 @@ VOID ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr) // for future planning
 
 void initMenu()
 {
-    Label label("Welcome :)", {OFFEST_LABLES_INPUT, 0}); // label indicate
+    Label label("Welcome :)", {OFFEST_LABLES_INPUT, 1}); // label indicate
     label.setColors(WHITE_FOREGROUND_COLOR);
     label.draw();
+
+    Label instractions("* Up and down to move between the lables ", {OFFEST_LABLES_INPUT*2, 0}); // label indicate    
+    instractions.setColors(WHITE_FOREGROUND_COLOR);
+    instractions.draw();
+
+    Label instractions2("* Tab to enter text, Enter to fill text, Left to back menu", {OFFEST_LABLES_INPUT*2, 2});
+    
+    instractions2.setColors(WHITE_FOREGROUND_COLOR);
+    instractions2.draw();
 
     /**
  * WHITE_FOREGROUND_COLOR, BACKGROUND_INTENSITY
  * 
 */
-    textbox.setColors(0,WHITE_BACKGROUND_COLOR);
+    textbox.setColors(0, WHITE_BACKGROUND_COLOR);
     textbox.drawInputArea();
 
     labelTextBox.setColors(WHITE_FOREGROUND_COLOR, SELECTED_BACKGROUND);
@@ -265,13 +272,13 @@ void initMenu()
     labelCheckBox.setColors(WHITE_FOREGROUND_COLOR, 0);
     labelCheckBox.draw();
 
-    checkbox1.setColors(0,WHITE_BACKGROUND_COLOR);
+    checkbox1.setColors(0, WHITE_BACKGROUND_COLOR);
     checkbox1.drawBoxArea();
     labelCheckBox1.setColors(WHITE_FOREGROUND_COLOR);
     checkbox1.setLabel(labelCheckBox1);
     checkbox1.drawLabel();
 
-    checkbox2.setColors(0,WHITE_BACKGROUND_COLOR);
+    checkbox2.setColors(0, WHITE_BACKGROUND_COLOR);
     checkbox2.drawBoxArea();
     labelCheckBox2.setColors(WHITE_FOREGROUND_COLOR);
     checkbox2.setLabel(labelCheckBox2);
