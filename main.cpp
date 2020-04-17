@@ -26,6 +26,8 @@ VOID MouseEventProc(MOUSE_EVENT_RECORD);
 VOID ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD);
 void initMenu();
 
+boolean checkBoxPosition = false;
+
 int main(VOID)
 {
     DWORD cNumRead, fdwMode, i;
@@ -119,6 +121,18 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker)
         case VK_LEFT:
             // printf("LEFT ARROW key");
             // textbox.draw();
+            if (checkBoxPosition)
+            {
+
+                checkBoxPosition = false;
+                labelCheckBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
+                // labelTextBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
+                // labelTextBox.draw();
+                checkbox1.setColors(BACKGROUND_INTENSITY);
+                checkbox2.setColors(BACKGROUND_INTENSITY);
+                labelCheckBox.draw();
+                mainController.setCurrCord({5, 10});
+            }
             break;
 
         case VK_RIGHT:
@@ -136,8 +150,9 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker)
             case CHECK_BOX_Y_POSITION:
                 //Should be another switch case on different boxes position
                 checkbox1.drawOnPress(mainController.getCurrCord().Y);
-                checkbox1.setColors(BACKGROUND_INTENSITY);
+                checkbox1.setColors(BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);
                 checkbox1.drawBoxArea();
+                checkBoxPosition = true;
                 break;
 
             default:
@@ -151,19 +166,24 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker)
             switch (mainController.getCurrCord().Y)
             {
             case 10:
-
-                labelCheckBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
-                labelTextBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
-                labelTextBox.draw();
-                labelCheckBox.draw();
-                mainController.setCurrCord({MENU_X_JUMP, (mainController.getCurrCord().Y) - MENU_Y_JUMP});
+                if (!checkBoxPosition)
+                {
+                    labelCheckBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+                    labelTextBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
+                    labelTextBox.draw();
+                    labelCheckBox.draw();
+                    mainController.setCurrCord({MENU_X_JUMP, (mainController.getCurrCord().Y) - MENU_Y_JUMP});
+                }
                 break;
             case 15: // Cursor is on the second box
-                mainController.setCurrCord({MENU_X_JUMP, (mainController.getCurrCord().Y) - MENU_Y_JUMP});
-                checkbox2.setColors(BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);//Unselected box - white
-                checkbox2.drawBoxArea();
-                checkbox1.setColors(BACKGROUND_INTENSITY);//selected box - grey
-                checkbox1.drawBoxArea();
+                if (checkBoxPosition)
+                {
+                    mainController.setCurrCord({MENU_X_JUMP, (mainController.getCurrCord().Y) - MENU_Y_JUMP});
+                    checkbox2.setColors(BACKGROUND_INTENSITY); //Unselected box - white
+                    checkbox2.drawBoxArea();
+                    checkbox1.setColors(BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY); //selected box - grey
+                    checkbox1.drawBoxArea();
+                }
             default:
                 break;
             }
@@ -173,37 +193,49 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker)
             switch (mainController.getCurrCord().Y)
             {
             case 5:
-                labelTextBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
-                labelCheckBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
-                labelTextBox.draw();
-                labelCheckBox.draw();
-                mainController.setCurrCord({MENU_X_JUMP, (mainController.getCurrCord().Y) + MENU_Y_JUMP});
+                if (!checkBoxPosition)
+                {
+                    labelTextBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+                    labelCheckBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
+                    labelTextBox.draw();
+                    labelCheckBox.draw();
+                    mainController.setCurrCord({MENU_X_JUMP, (mainController.getCurrCord().Y) + MENU_Y_JUMP});
+                }
                 break;
             case 10: //Cursor is on the first checkbox
-                mainController.setCurrCord({MENU_X_JUMP, (mainController.getCurrCord().Y) + MENU_Y_JUMP});
-                checkbox1.setColors(BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);//Unselected box - white
-                checkbox1.drawBoxArea();
-                checkbox2.setColors(BACKGROUND_INTENSITY); //Selected box - grey
-                checkbox2.drawBoxArea();
+                if (checkBoxPosition)
+                {
+                    mainController.setCurrCord({MENU_X_JUMP, (mainController.getCurrCord().Y) + MENU_Y_JUMP});
+                    checkbox1.setColors(BACKGROUND_INTENSITY); //Unselected box - white
+                    checkbox1.drawBoxArea();
+                    checkbox2.setColors(BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY); //Selected box - grey
+                    checkbox2.drawBoxArea();
+                }
             default:
                 break;
             }
 
             break;
 
-        case VK_RETURN:
+        case VK_RETURN: //Enter
             //Switch case on the boxes according to Y position
             switch (mainController.getCurrCord().Y)
             {
             case 10:
-                checkbox1.drawOnPress(mainController.getCurrCord().Y);
-                checkbox1.setCheckedBox();
-                checkbox1.drawBoxArea();
+                if (checkBoxPosition)
+                {
+                    checkbox1.drawOnPress(mainController.getCurrCord().Y);
+                    checkbox1.setCheckedBox();
+                    checkbox1.drawBoxArea();
+                }
                 break;
             case 15:
-                checkbox2.drawOnPress(mainController.getCurrCord().Y);
-                checkbox2.setCheckedBox();
-                checkbox2.drawBoxArea();
+                if (checkBoxPosition)
+                {
+                    checkbox2.drawOnPress(mainController.getCurrCord().Y);
+                    checkbox2.setCheckedBox();
+                    checkbox2.drawBoxArea();
+                }
                 break;
             }
 
