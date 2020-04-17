@@ -22,9 +22,6 @@ public:
     void setCoord(COORD coord) { this->coord = coord; }
     COORD getCoord() { return this->coord; }
 
-    // void setOutHandle(HANDLE nOutHandle) { this->outHandle = nOutHandle; }
-    // HANDLE getOutHandle() { return this->outHandle; }
-
     void setColors(DWORD fg = 0, DWORD bg = 0)
     {
         this->colors = fg | bg;

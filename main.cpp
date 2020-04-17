@@ -10,6 +10,7 @@ DWORD fdwSaveOldMode;
 
 Controller mainController({5, 5});
 TextBox textbox({20, 5});
+
 Label labelTextBox("Text Box", {5, 5});
 
 Label labelCheckBox("Check Box", {5, 10});
@@ -119,15 +120,10 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker)
         switch (ker.wVirtualKeyCode)
         {
         case VK_LEFT:
-            // printf("LEFT ARROW key");
-            // textbox.draw();
             if (checkBoxPosition)
             {
-
                 checkBoxPosition = false;
                 labelCheckBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
-                // labelTextBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
-                // labelTextBox.draw();
                 checkbox1.setColors(BACKGROUND_INTENSITY);
                 checkbox2.setColors(BACKGROUND_INTENSITY);
                 labelCheckBox.draw();
@@ -150,7 +146,7 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker)
             case CHECK_BOX_Y_POSITION:
                 //Should be another switch case on different boxes position
                 checkbox1.drawOnPress(mainController.getCurrCord().Y);
-                checkbox1.setColors(BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);
+                checkbox1.setColors(WHITE_FOREGROUND_COLOR);
                 checkbox1.drawBoxArea();
                 checkBoxPosition = true;
                 break;
@@ -168,8 +164,8 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker)
             case 10:
                 if (!checkBoxPosition)
                 {
-                    labelCheckBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
-                    labelTextBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
+                    labelCheckBox.setColors(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY, 0);
+                    labelTextBox.setColors(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
                     labelTextBox.draw();
                     labelCheckBox.draw();
                     mainController.setCurrCord({MENU_X_JUMP, (mainController.getCurrCord().Y) - MENU_Y_JUMP});
@@ -181,7 +177,7 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker)
                     mainController.setCurrCord({MENU_X_JUMP, (mainController.getCurrCord().Y) - MENU_Y_JUMP});
                     checkbox2.setColors(BACKGROUND_INTENSITY); //Unselected box - white
                     checkbox2.drawBoxArea();
-                    checkbox1.setColors(BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY); //selected box - grey
+                    checkbox1.setColors(0,BACKGROUND_GREEN); //selected box - grey
                     checkbox1.drawBoxArea();
                 }
             default:
@@ -195,8 +191,8 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker)
             case 5:
                 if (!checkBoxPosition)
                 {
-                    labelTextBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
-                    labelCheckBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
+                    labelCheckBox.setColors(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
+                    labelTextBox.setColors(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY, 0);
                     labelTextBox.draw();
                     labelCheckBox.draw();
                     mainController.setCurrCord({MENU_X_JUMP, (mainController.getCurrCord().Y) + MENU_Y_JUMP});
@@ -301,13 +297,17 @@ void initMenu()
     label.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
     label.draw();
 
+    /**
+ * FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY
+ * 
+*/
     textbox.setColors(BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);
     textbox.drawInputArea();
 
-    labelTextBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
+    labelTextBox.setColors(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
     labelTextBox.draw();
 
-    labelCheckBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
+    labelCheckBox.setColors(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY, 0);
     labelCheckBox.draw();
 
     checkbox1.setColors(BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);

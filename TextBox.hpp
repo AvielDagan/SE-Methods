@@ -1,4 +1,3 @@
-#pragma once
 #include <string>
 #include <windows.h>
 #include <iostream>
@@ -15,7 +14,7 @@ class TextBox
     HANDLE outHandle;
 
 public:
-    TextBox(COORD coord) : coord(coord), outHandle(GetStdHandle(STD_OUTPUT_HANDLE)){};
+    TextBox(COORD coord) : coord(coord){};
 
     void setValue(string value) { this->value = value; }
     string getValue() { return this->value; }
@@ -23,32 +22,32 @@ public:
     void setCoord(COORD coord) { this->coord = coord; }
     COORD getCoord() { return this->coord; }
 
-    void setOutHandle(HANDLE nOutHandle) {this->outHandle = nOutHandle;}
+    void setOutHandle(HANDLE nOutHandle) { this->outHandle = nOutHandle; }
     HANDLE getOutHandle() { return this->outHandle; }
 
-    void setColors(DWORD fg=0, DWORD bg=0)
+    void setColors(DWORD fg = 0, DWORD bg = 0)
     {
         this->colors = fg | bg;
     }
 
     void drawInputArea()
     {
-        SetConsoleCursorPosition(this->getOutHandle(), coord);
-        SetConsoleTextAttribute(this->getOutHandle(), colors);
+        outHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleCursorPosition(outHandle, coord);
+        SetConsoleTextAttribute(outHandle, this->colors);
         cout << "                   ";
-        
     }
 
     void drawInput(int currYCord)
     {
-        SetConsoleCursorPosition(this->getOutHandle(), {OFFEST_LABLES_INPUT,currYCord});
-        SetConsoleTextAttribute(this->getOutHandle(), colors);
+        outHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleCursorPosition(outHandle, {OFFEST_LABLES_INPUT, currYCord});
+        SetConsoleTextAttribute(outHandle, colors);
         CONSOLE_CURSOR_INFO info = {OFFEST_LABLES_INPUT, 1};
         SetConsoleCursorInfo(outHandle, &info);
 
-        getline (cin, this->value);
+        getline(cin, this->value);
 
-        
         info = {OFFEST_LABLES_INPUT, 0};
         SetConsoleCursorInfo(outHandle, &info);
         return;

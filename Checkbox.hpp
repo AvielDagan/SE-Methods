@@ -15,9 +15,9 @@ class Checkbox
 public:
     Checkbox(COORD coord) : isChecked(true), coord(coord){};
 
-    Checkbox(Label label, COORD coord) : label(label),
-                                         coord(coord),
-                                         isChecked(true){};
+    // Checkbox(Label label, COORD coord) : label(label),
+    //                                      coord(coord),
+    //                                      isChecked(true){};
 
     void setLabel(Label label) { this->label = label; }
     Label getLabel() { return this->label; }
@@ -48,13 +48,14 @@ public:
         outHandle = GetStdHandle(STD_OUTPUT_HANDLE);
         SetConsoleCursorPosition(outHandle, coord);
         SetConsoleTextAttribute(outHandle, this->colors);
-        this->isChecked ? cout << " X " : cout << "  ";
+        this->isChecked ? cout << " X " : cout << "   ";
     }
 
     void drawOnPress(int currYCord)
     {
-        SetConsoleCursorPosition(this->getOutHandle(), {OFFEST_LABLES_INPUT, currYCord});
-        SetConsoleTextAttribute(this->getOutHandle(), colors);
+        outHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleCursorPosition(outHandle, {OFFEST_LABLES_INPUT, currYCord});
+        SetConsoleTextAttribute(outHandle, colors);
         CONSOLE_CURSOR_INFO info = {OFFEST_LABLES_INPUT, 0};
         SetConsoleCursorInfo(outHandle, &info);
     }
