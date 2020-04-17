@@ -22,8 +22,8 @@ public:
     void setCoord(COORD coord) { this->coord = coord; }
     COORD getCoord() { return this->coord; }
 
-    void setOutHandle(HANDLE nOutHandle) { this->outHandle = nOutHandle; }
-    HANDLE getOutHandle() { return this->outHandle; }
+    // void setOutHandle(HANDLE nOutHandle) { this->outHandle = nOutHandle; }
+    // HANDLE getOutHandle() { return this->outHandle; }
 
     void setColors(DWORD fg = 0, DWORD bg = 0)
     {
@@ -39,8 +39,8 @@ public:
          */
 
         outHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-        SetConsoleCursorPosition(this->getOutHandle(), coord);
-        SetConsoleTextAttribute(this->getOutHandle(), colors);
+        SetConsoleCursorPosition(outHandle, coord);
+        SetConsoleTextAttribute(outHandle, this->colors);
         cout << this->value;
     }
 };
