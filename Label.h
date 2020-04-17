@@ -1,4 +1,3 @@
-#pragma once
 #include <string>
 #include <windows.h>
 #include <iostream>
@@ -11,17 +10,20 @@ class Label
     string value; //name of the label
     COORD coord;  //coordinates
     DWORD colors;
+    HANDLE outHandle;
 
 public:
     Label(){};
     Label(string value, COORD coord) : value(value), coord(coord){};
 
-    // Label(string value, COORD coord) : value(value), coord(coord){};
     void setValue(string value) { this->value = value; }
     string getValue() { return this->value; }
 
     void setCoord(COORD coord) { this->coord = coord; }
     COORD getCoord() { return this->coord; }
+
+    void setOutHandle(HANDLE nOutHandle) { this->outHandle = nOutHandle; }
+    HANDLE getOutHandle() { return this->outHandle; }
 
     void setColors(DWORD fg = 0, DWORD bg = 0)
     {
@@ -36,12 +38,9 @@ public:
          * 3. Hide input cursor
          */
 
-        auto outHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-        SetConsoleCursorPosition(outHandle, coord);
-        SetConsoleTextAttribute(outHandle, colors);
+        outHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleCursorPosition(this->getOutHandle(), coord);
+        SetConsoleTextAttribute(this->getOutHandle(), colors);
         cout << this->value;
-
-        CONSOLE_CURSOR_INFO info = {20, 0};
-        SetConsoleCursorInfo(outHandle, &info);
     }
 };
