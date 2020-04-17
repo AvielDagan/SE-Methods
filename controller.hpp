@@ -9,13 +9,9 @@ private:
     COORD currCord;
 
 public:
-    Controller(COORD currCord) : currCord(currCord)
-    {
-        // hStdin = GetStdHandle(STD_INPUT_HANDLE);
-    };
+    Controller(COORD currCord) : currCord(currCord){}
 
     COORD getCurrCord() { return this->currCord; }
     void setCurrCord(COORD cord) { this->currCord = cord; }
 
-    // HANDLE gethStdin() { return this->hStdin; }
 };

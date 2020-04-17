@@ -29,15 +29,11 @@ public:
 
     void draw()
     {
-        /**
-         * 1. Set console cordinated //
-         * 2. Write text to console // cout << ...
-         * 3. Hide input cursor
-         */
-
         outHandle = GetStdHandle(STD_OUTPUT_HANDLE);
         SetConsoleCursorPosition(outHandle, coord);
         SetConsoleTextAttribute(outHandle, this->colors);
         cout << this->value;
+        CONSOLE_CURSOR_INFO info = {20, 0};
+        SetConsoleCursorInfo(outHandle, &info);
     }
 };

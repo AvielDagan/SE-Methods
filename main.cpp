@@ -27,7 +27,7 @@ VOID MouseEventProc(MOUSE_EVENT_RECORD);
 VOID ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD);
 void initMenu();
 
-boolean checkBoxPosition = false;
+boolean insideCheckBox = false;
 
 int main(VOID)
 {
@@ -76,11 +76,9 @@ int main(VOID)
                 break;
 
             case MOUSE_EVENT: // mouse input
-                MouseEventProc(irInBuf[i].Event.MouseEvent);
                 break;
 
             case WINDOW_BUFFER_SIZE_EVENT: // scrn buf. resizing
-                ResizeEventProc(irInBuf[i].Event.WindowBufferSizeEvent);
                 break;
 
             case FOCUS_EVENT: // disregard focus events
@@ -105,8 +103,6 @@ VOID ErrorExit(LPSTR lpszMessage)
 {
     fprintf(stderr, "%s\n", lpszMessage);
 
-    // Restore input mode on exit.
-
     SetConsoleMode(hStdin, fdwSaveOldMode);
 
     ExitProcess(0);
@@ -120,19 +116,20 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker)
         switch (ker.wVirtualKeyCode)
         {
         case VK_LEFT:
-            if (checkBoxPosition)
+            if (insideCheckBox)
             {
-                checkBoxPosition = false;
-                labelCheckBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
-                checkbox1.setColors(BACKGROUND_INTENSITY);
-                checkbox2.setColors(BACKGROUND_INTENSITY);
+                insideCheckBox = false;
+                labelCheckBox.setColors(WHITE_FOREGROUND_COLOR, SELECTED_BACKGROUND);
+                checkbox1.setColors(0,WHITE_BACKGROUND_COLOR);
+                checkbox2.setColors(0,WHITE_BACKGROUND_COLOR);
+                checkbox1.drawBoxArea();
+                checkbox2.drawBoxArea();
                 labelCheckBox.draw();
                 mainController.setCurrCord({5, 10});
             }
             break;
 
         case VK_RIGHT:
-            // printf("RIGHT ARROW key");
             break;
 
         case VK_TAB:
@@ -145,39 +142,39 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker)
 
             case CHECK_BOX_Y_POSITION:
                 //Should be another switch case on different boxes position
+                labelCheckBox.setColors(WHITE_FOREGROUND_COLOR);
+                labelCheckBox.draw();
                 checkbox1.drawOnPress(mainController.getCurrCord().Y);
-                checkbox1.setColors(WHITE_FOREGROUND_COLOR);
+                checkbox1.setColors(0,SELECTED_BACKGROUND);
                 checkbox1.drawBoxArea();
-                checkBoxPosition = true;
+                insideCheckBox = true;
                 break;
 
             default:
                 break;
             }
-            // return;
 
             break;
         case VK_UP:
-            // printf("RIGHT ARROW key");
             switch (mainController.getCurrCord().Y)
             {
             case 10:
-                if (!checkBoxPosition)
+                if (!insideCheckBox)
                 {
-                    labelCheckBox.setColors(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY, 0);
-                    labelTextBox.setColors(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
+                    labelCheckBox.setColors(WHITE_FOREGROUND_COLOR);
+                    labelTextBox.setColors(WHITE_FOREGROUND_COLOR, SELECTED_BACKGROUND);
                     labelTextBox.draw();
                     labelCheckBox.draw();
                     mainController.setCurrCord({MENU_X_JUMP, (mainController.getCurrCord().Y) - MENU_Y_JUMP});
                 }
                 break;
             case 15: // Cursor is on the second box
-                if (checkBoxPosition)
+                if (insideCheckBox)
                 {
                     mainController.setCurrCord({MENU_X_JUMP, (mainController.getCurrCord().Y) - MENU_Y_JUMP});
-                    checkbox2.setColors(BACKGROUND_INTENSITY); //Unselected box - white
+                    checkbox2.setColors(0,WHITE_BACKGROUND_COLOR); //Unselected box - white
                     checkbox2.drawBoxArea();
-                    checkbox1.setColors(0,BACKGROUND_GREEN); //selected box - grey
+                    checkbox1.setColors(0,SELECTED_BACKGROUND); //selected box - grey
                     checkbox1.drawBoxArea();
                 }
             default:
@@ -189,22 +186,22 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker)
             switch (mainController.getCurrCord().Y)
             {
             case 5:
-                if (!checkBoxPosition)
+                if (!insideCheckBox)
                 {
-                    labelCheckBox.setColors(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
-                    labelTextBox.setColors(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY, 0);
+                    labelCheckBox.setColors(WHITE_FOREGROUND_COLOR, SELECTED_BACKGROUND);
+                    labelTextBox.setColors(WHITE_FOREGROUND_COLOR, 0);
                     labelTextBox.draw();
                     labelCheckBox.draw();
                     mainController.setCurrCord({MENU_X_JUMP, (mainController.getCurrCord().Y) + MENU_Y_JUMP});
                 }
                 break;
             case 10: //Cursor is on the first checkbox
-                if (checkBoxPosition)
+                if (insideCheckBox)
                 {
                     mainController.setCurrCord({MENU_X_JUMP, (mainController.getCurrCord().Y) + MENU_Y_JUMP});
-                    checkbox1.setColors(BACKGROUND_INTENSITY); //Unselected box - white
+                    checkbox1.setColors(0,WHITE_BACKGROUND_COLOR); //Unselected box - white
                     checkbox1.drawBoxArea();
-                    checkbox2.setColors(BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY); //Selected box - grey
+                    checkbox2.setColors(0,SELECTED_BACKGROUND); //Selected box - grey
                     checkbox2.drawBoxArea();
                 }
             default:
@@ -218,7 +215,7 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker)
             switch (mainController.getCurrCord().Y)
             {
             case 10:
-                if (checkBoxPosition)
+                if (insideCheckBox)
                 {
                     checkbox1.drawOnPress(mainController.getCurrCord().Y);
                     checkbox1.setCheckedBox();
@@ -226,7 +223,7 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker)
                 }
                 break;
             case 15:
-                if (checkBoxPosition)
+                if (insideCheckBox)
                 {
                     checkbox2.drawOnPress(mainController.getCurrCord().Y);
                     checkbox2.setCheckedBox();
@@ -238,54 +235,12 @@ VOID KeyEventProc(KEY_EVENT_RECORD ker)
         default:
             break;
         }
-        // if (ker.wVirtualKeyCode == 0x25)
-        //     printf("LEFT ARROW pressed");
+
     }
 }
 
-VOID MouseEventProc(MOUSE_EVENT_RECORD mer)
-{
-#ifndef MOUSE_HWHEELED
-#define MOUSE_HWHEELED 0x0008
-#endif
-    printf("Mouse event: ");
 
-    switch (mer.dwEventFlags)
-    {
-    case 0:
-
-        if (mer.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED)
-        {
-            printf("left button press \n");
-        }
-        else if (mer.dwButtonState == RIGHTMOST_BUTTON_PRESSED)
-        {
-            printf("right button press \n");
-        }
-        else
-        {
-            printf("button press\n");
-        }
-        break;
-    case DOUBLE_CLICK:
-        printf("double click\n");
-        break;
-    case MOUSE_HWHEELED:
-        printf("horizontal mouse wheel\n");
-        break;
-    case MOUSE_MOVED:
-        printf("mouse moved\n");
-        break;
-    case MOUSE_WHEELED:
-        printf("vertical mouse wheel\n");
-        break;
-    default:
-        printf("unknown\n");
-        break;
-    }
-}
-
-VOID ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr)
+VOID ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr) // for future planning 
 {
     // printf("Resize event\n");
     // printf("Console screen buffer is %d columns by %d rows.\n", wbsr.dwSize.X, wbsr.dwSize.Y);
@@ -294,31 +249,31 @@ VOID ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr)
 void initMenu()
 {
     Label label("Welcome :)", {OFFEST_LABLES_INPUT, 0}); // label indicate
-    label.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+    label.setColors(WHITE_FOREGROUND_COLOR);
     label.draw();
 
     /**
- * FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY
+ * WHITE_FOREGROUND_COLOR, BACKGROUND_INTENSITY
  * 
 */
-    textbox.setColors(BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);
+    textbox.setColors(0,WHITE_BACKGROUND_COLOR);
     textbox.drawInputArea();
 
-    labelTextBox.setColors(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
+    labelTextBox.setColors(WHITE_FOREGROUND_COLOR, SELECTED_BACKGROUND);
     labelTextBox.draw();
 
-    labelCheckBox.setColors(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY, 0);
+    labelCheckBox.setColors(WHITE_FOREGROUND_COLOR, 0);
     labelCheckBox.draw();
 
-    checkbox1.setColors(BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);
+    checkbox1.setColors(0,WHITE_BACKGROUND_COLOR);
     checkbox1.drawBoxArea();
-    labelCheckBox1.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
+    labelCheckBox1.setColors(WHITE_FOREGROUND_COLOR);
     checkbox1.setLabel(labelCheckBox1);
     checkbox1.drawLabel();
 
-    checkbox2.setColors(BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);
+    checkbox2.setColors(0,WHITE_BACKGROUND_COLOR);
     checkbox2.drawBoxArea();
-    labelCheckBox2.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
+    labelCheckBox2.setColors(WHITE_FOREGROUND_COLOR);
     checkbox2.setLabel(labelCheckBox2);
     checkbox2.drawLabel();
 }
