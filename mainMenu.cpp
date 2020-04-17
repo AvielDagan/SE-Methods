@@ -4,6 +4,7 @@
 #include "Label.h"
 #include "TextBox.hpp"
 #include "controller.hpp"
+#include "Checkbox.hpp"
 
 HANDLE hStdin;
 DWORD fdwSaveOldMode;
@@ -12,6 +13,12 @@ Controller mainController({5, 5});
 TextBox textbox({20, 5});
 Label labelTextBox("Text Box", {5, 5});
 Label labelCheckBox("Check Box", {5, 10});
+
+Label labelCheckBox1("Check Box1", {25, 10});
+Checkbox checkbox1({40, 40});
+
+Label labelCheckBox2("Check Box2", {25, 15});
+Checkbox checkbox2({20, 25});
 
 VOID ErrorExit(LPSTR);
 VOID KeyEventProc(KEY_EVENT_RECORD);
@@ -44,8 +51,7 @@ int main(VOID)
 
     // Loop to read and handle the next 100 input events.
 
-
-    // set init options and print menu  
+    // set init options and print menu
     initMenu();
 
     // Dispatch the events to the appropriate handler.
@@ -237,9 +243,22 @@ void initMenu()
     textbox.setColors(BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);
     textbox.drawInputArea();
 
-    labelTextBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY,BACKGROUND_INTENSITY);
+    labelTextBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
     labelTextBox.draw();
 
     labelCheckBox.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY);
     labelCheckBox.draw();
+
+    checkbox1.setColors(BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);
+    checkbox1.drawBoxArea();
+
+    labelCheckBox1.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
+    checkbox1.setLabel(labelCheckBox1);
+    checkbox1.drawLabel();
+
+    // checkbox2.setColors(BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY);
+    // checkbox2.drawBoxArea();
+    // labelCheckBox2.setColors(FOREGROUND_BLUE | FOREGROUND_INTENSITY, BACKGROUND_INTENSITY);
+    // checkbox2.setLabel(labelCheckBox2);
+    // checkbox2.drawLabel();
 }
