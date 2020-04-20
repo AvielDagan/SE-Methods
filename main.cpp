@@ -54,7 +54,7 @@ int main(VOID)
 
     // Loop to read and handle the next 100 input events.
 
-    // set init options and print menu
+    // set init options and print the menu 
     initMenu();
 
     // Dispatch the events to the appropriate handler.
