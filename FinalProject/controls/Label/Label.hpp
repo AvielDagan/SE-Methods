@@ -12,7 +12,7 @@ private:
 
 public:
     string getTitle();
-    void setTitle(string);
+    void setTitle(string s);
     void draw(Graphics &g, short left, short top, short width, short height, size_t z); //inherits from Control
 
 

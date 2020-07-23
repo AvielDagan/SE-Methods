@@ -18,6 +18,7 @@ public:
     COORD getControlLocation();
     void setControlLocation(COORD);
     void draw(Graphics& g,short left, short top,size_t z);
+    void panelSize();
     // notify();
     Panel(short left,short top,short width, short height, BorderDrawer* border, Color textColor, Color BgColor, size_t layer);
     ~Panel();

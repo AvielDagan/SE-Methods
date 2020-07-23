@@ -10,19 +10,29 @@
 #include "../controls/Panel/Panel.hpp"
 // #include "../controls/SingleBorderDrawer/SingleBorderDrawer.hpp"
 
+#include <iostream>
+using namespace std;
+
 int main(int argc, char const *argv[])
 {
     EventEngine engine;
     DoubleBorderDrawer *dbd = new DoubleBorderDrawer;
     // BorderDrawer* sbd = new SingleBorderDrawer;
     Panel panel(0, 0, 0, 0, dbd, Color::White, Color::Black, 1);
-    engine.run(panel);
-    // Label l(5, 5, 5, 5, dbd, Color::Cyan, Color::Black, "test label");
+    Label l(5, 5, 5, 5, dbd, Color::Cyan, Color::Black, "test label");
+    Label ll(10, 10, 10, 10, dbd, Color::Cyan, Color::Black, "test label");
     // Button b(10, 10, 5, 5, dbd, Color::Cyan, Color::Black, "test Button");
     // std::cout << "printing" << std::endl;
     
     // panel.addControl(&b);
-    // panel.addControl(&l);
+    panel.addControl(&l);
+    // panel.addControl(&ll);
+
+    // cout << "panel.getWidth() -> " << panel.getWidth() << endl;
+    // cout << "panel.getHeight() -> " << panel.getHeight() << endl;  
+    engine.run(panel);
+    
+    while(1);
 
     return 0;
 }

@@ -1,5 +1,5 @@
 #include "./EventEngine.hpp"
-
+#include <iostream>
 using namespace std;
 
 EventEngine::EventEngine(DWORD input, DWORD output)
@@ -17,11 +17,16 @@ void EventEngine::run(Control &c)
 		{
 			_graphics.clearScreen();
 			_graphics.setCursorVisibility(false);
+			_graphics.setForeground(Color::White);
+			_graphics.setBackground(Color::Black);
 			// cout << "inside redraw" << endl;
 			for (size_t z = 0; z < 5; ++z)
 			{
-				c.draw(_graphics, 0, 0,0,0, z);
-			}	
+				// std::cout << "c.getLeft() " << c.getLeft() << std::endl;
+				// std::cout << "c.getTop() " << c.getTop() << std::endl;
+				// c.draw(_graphics, c.getLeft(), c.getTop(), c.getLeft(), c.getTop(), z);
+				c.draw(_graphics, c.getLeft(), c.getTop(), c.getLeft(), c.getTop(), z);
+			}
 			redraw = false;
 		}
 		// cout << "after redrawwwwwwwww" << endl;
@@ -59,9 +64,9 @@ EventEngine::~EventEngine()
 
 void EventEngine::moveFocus(Control &main, Control *focused)
 {
-	vector<Control*> controls;
+	vector<Control *> controls;
 	main.getAllControls(&controls);
-	auto it = find(controls.begin(), controls.end(), focused);//find focused
+	auto it = find(controls.begin(), controls.end(), focused); //find focused
 	do
 		if (++it == controls.end())
 			it = controls.begin();
