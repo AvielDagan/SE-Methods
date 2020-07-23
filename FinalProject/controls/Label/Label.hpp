@@ -17,6 +17,5 @@ public:
 
 
     Label(short left, short top, short width, short height, BorderDrawer *border, Color textColor, Color BgColor, string value);
-    Label();
-    ~Label();
+    // ~Label();
 };

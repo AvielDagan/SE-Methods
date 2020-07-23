@@ -6,14 +6,14 @@
 #include "../controls/CheckBox/CheckBox.hpp"
 #include "../controls/CheckList/CheckList.hpp"
 #include "../controls/ComboBox/ComboBox.hpp"
-#include "../controls/DoubleBorderDrawer/DoubleBorderDrawer.hpp"
+#include "../Controls/DoubleBorderDrawer/DoubleBorderDrawer.hpp"
 #include "../controls/Panel/Panel.hpp"
 // #include "../controls/SingleBorderDrawer/SingleBorderDrawer.hpp"
 
 int main(int argc, char const *argv[])
 {
 
-    BorderDrawer* dbd = new DoubleBorderDrawer;
+    DoubleBorderDrawer* dbd = new DoubleBorderDrawer;
     // BorderDrawer* sbd = new SingleBorderDrawer;
     Panel panel(0,0,20,20,dbd,Color::Cyan, Color::Black,1);
     Label l(5,5,5,5,dbd, Color::Cyan, Color::Black,"test label");

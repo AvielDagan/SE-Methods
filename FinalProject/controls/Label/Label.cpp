@@ -8,7 +8,7 @@ string Label::getTitle()
     return title;
 }
 
-Label::~Label(){}
+// Label::~Label(){}
 
 void Label::setTitle(string title)
 {

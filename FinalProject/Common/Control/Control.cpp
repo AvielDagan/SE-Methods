@@ -22,5 +22,5 @@ void Control::draw(Graphics &graphics, short left, short top, short width, short
     graphics.setForeground(getTextColor());
     graphics.setBackground(getBgColor());
     graphics.setCursorVisibility(false);
-    _border->draw(graphics, left, top, width, height);
+    _border->drawBorder(graphics, left, top, width, height);
 }

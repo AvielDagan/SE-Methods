@@ -3,12 +3,12 @@
 #include <iostream>
 using namespace std;
 
-// Subject::Subject()
-// {
-// }
-// Subject::~Subject()
-// {
-// }
+Subject::Subject()
+{
+}
+Subject::~Subject()
+{
+}
 void Subject::addObserver(shared_ptr<Observer> observer)
 {
     if (observer != NULL)
