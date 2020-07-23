@@ -7,34 +7,48 @@
 
 using namespace std;
 
-
 class Control : public Observer
 {
-private: 
-	const BorderDrawer *_borderDrawer;
-
 protected:
 	short _left;
 	short _top;
+	short _width;
+	short _height;
+	BorderDrawer *_border;
+	Color _textColor;
+	Color _BgColor;
+	size_t _layer;
+	static Control *_focused;
+
 public:
 	//static and virtual  implemented in the hpp file
-	static Control* getFocus() { return NULL; };
-	static void setFocus(Control& control) {};
-	
-	
-	virtual void keyDown(int keyCode, char charecter) {};
-	virtual short getLeft() { return 0; };
-	virtual short getTop() { return 0; };
-	virtual void getAllControls(vector<Control*>* controls) {};
-	virtual bool canGetFocus() { return FALSE; };
 
-	virtual void setBorderDrawer(const BorderDrawer &borderDrawer) { _borderDrawer = &borderDrawer; }
-	virtual void draw(Graphics& g, int x, int y, size_t z) {};
-	virtual void draw(Graphics &g, short left, short top,int width,int height, size_t layer) const {
-		_borderDrawer->draw(g, _left + left, _top + top, width, height);
-	}
+	virtual bool canGetFocus() { return false; };
 
-	Control(){}
-	~Control(){}
+	static Control *getFocus() { return _focused; };
+	virtual short getLeft() { return _left; };
+	virtual short getTop() { return _top; };
+	virtual short getWidth() { return _width; };
+	virtual short getHeight() { return _height; };
+	BorderDrawer *getBorder() { return _border; };
+	Color getTextColor() { return _textColor; };
+	Color getBgColor() { return _BgColor; };
+
+	static void setFocus(Control &control){};
+	virtual void setLeft(short left) { this->_left = left; };
+	virtual void setTop(short top) { this->_top = top; };
+	virtual void setWidth(short width) { this->_width = width; };
+	virtual void setHeight(short height) { this->_height = height; };
+	void setBorderDrawer(BorderDrawer &borderDrawer) { _border = &borderDrawer; }
+	void setTextColor(Color textColor) { this->_textColor = textColor; };
+	void setBgColor(Color BgColor) { this->_BgColor = BgColor; };
+
+	virtual void draw(Graphics &g, short left, short top, int width, int height, size_t layer);
+	virtual void keyDown(int keyCode, char charecter){};
+	virtual void getAllControls(vector<Control *> *controls){};
+
+	// virtual void draw(Graphics &g, int x, int y, size_t z){};
+
+	Control(short left, short top, short with, short height, BorderDrawer *border, Color textColor, Color BgColor) {}
+	virtual ~Control() = 0;
 };
-
