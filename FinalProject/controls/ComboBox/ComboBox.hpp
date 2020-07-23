@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Panel.hpp"
-#include "Label.hpp"
-#include "Button.hpp"
+#include "../Panel/Panel.hpp"
+#include "../Label/Label.hpp"
+#include "../Button/Button.hpp"
 
 class ComboBox : public Panel
 {
@@ -18,6 +18,6 @@ public:
     void onChosenLabelPress(Label);
     void traverse();
 
-    ComboBox();
+    ComboBox(short left,short top,short width, short height, BorderDrawer* border, Color textColor, Color BgColor, size_t layer);
     ~ComboBox();
 };

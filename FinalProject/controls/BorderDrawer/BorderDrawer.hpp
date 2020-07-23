@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Graphics/Graphics.hpp"
+#include "../../Common/Graphics/Graphics.hpp"
 #include "iostream"
 using namespace std;
 
@@ -10,7 +10,7 @@ public:
 	BorderDrawer(char topLeft, char topRight, char bottomLeft, char bottomRight, char horizontal, char vertical) :
     topLeft(topLeft), topRight(topRight), bottomLeft(bottomLeft), bottomRight(bottomRight), horizontal(horizontal),
     vertical(vertical) {} ;
-	
+	void draw(Graphics& g,short left, short top, short width, short height){}//need to finish this method
 	virtual void drawBorder(Graphics &g, short left, short top, int width, int height)
 	{
 		string line(width, horizontal);

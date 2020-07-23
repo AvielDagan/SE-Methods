@@ -18,7 +18,7 @@ void Subject::actions(int keyCode)
 {
     for (auto const &value : observers)
     {
-        value->notify(keyCode);
+        // value->notify(keyCode);
     }
 }
 // not sure if need this method 
