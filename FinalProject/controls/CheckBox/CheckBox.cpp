@@ -1,6 +1,8 @@
+#pragma once
 #include "./CheckBox.hpp"
+#include "../Label/Label.hpp"
 
-CheckBox::CheckBox(Label title, Button box)
+CheckBox::CheckBox(Label title, Button box): title(title), box(box)
 {
 }
 

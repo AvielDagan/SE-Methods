@@ -14,6 +14,6 @@ class Subject{
         void actions(int keyCode);
         void listenKeyStroke();//while(1)
         Subject();
-        ~Subject();
+        virtual ~Subject() = 0;
         
 };

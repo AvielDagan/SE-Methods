@@ -3,12 +3,12 @@
 #include <iostream>
 using namespace std;
 
-// Subject::Subject()
-// {
-// }
-// Subject::~Subject()
-// {
-// }
+Subject::Subject()
+{
+}
+Subject::~Subject()
+{
+}
 void Subject::addObserver(shared_ptr<Observer> observer)
 {
     if (observer != NULL)
@@ -18,7 +18,7 @@ void Subject::actions(int keyCode)
 {
     for (auto const &value : observers)
     {
-        value->notify(keyCode);
+        // value->notify(keyCode);
     }
 }
 // not sure if need this method 

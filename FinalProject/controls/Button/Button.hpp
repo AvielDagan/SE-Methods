@@ -1,13 +1,11 @@
 #pragma once
 
 #include <iostream>
-#include "Label.hpp"
+#include "../Label/Label.hpp"
 
 class Button : public Label
 {
-private:
 public:
-    Button(short left, short top, short with, Label label);
-    ~Button();
-    void draw(Graphics &g, int x, int y, size_t z);
+    Button(short left, short top, short width, short height, BorderDrawer* border, Color textColor, Color BgColor,string title);
+    // ~Button();
 };

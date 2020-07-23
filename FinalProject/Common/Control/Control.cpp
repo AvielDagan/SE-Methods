@@ -1,6 +1,4 @@
-#pragma one
 #include "Control.hpp"
-#include "../BorderDrawer/BorderDrawer.hpp"
 
 Control *Control::_focused = NULL;
 
@@ -8,16 +6,16 @@ Control::Control(short left, short top, short width, short height, BorderDrawer 
 
 Control::~Control()
 {
-    if (_border)
-    {
-        delete _border;
-    }
+    // if (_border)
+    // {
+    //     delete _border;
+    // }
 }
 
-void Control::setFocus(Control &control)
-{ //! check for errors!
-    _focused = &control;
-}
+// static void Control::setFocus(Control &control)
+// { //! check for errors!
+//     _focused = &control;
+// }
 
 void Control::draw(Graphics &graphics, short left, short top, short width, short height, size_t layer)
 {

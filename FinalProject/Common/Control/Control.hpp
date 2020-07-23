@@ -1,9 +1,9 @@
 #pragma once
 
 #include <vector>
-#include "Graphics.hpp"
-#include "../BorderDrawer/BorderDrawer.hpp"
-#include "../Observer/Observer.hpp"
+#include "../Graphics/Graphics.hpp"
+#include "../../controls/BorderDrawer/BorderDrawer.hpp"
+#include "../../controls/Observer/Observer.hpp"
 
 using namespace std;
 
@@ -34,7 +34,7 @@ public:
 	Color getTextColor() { return _textColor; };
 	Color getBgColor() { return _BgColor; };
 
-	static void setFocus(Control &control){};
+	static void setFocus(Control &control){_focused = &control;};
 	virtual void setLeft(short left) { this->_left = left; };
 	virtual void setTop(short top) { this->_top = top; };
 	virtual void setWidth(short width) { this->_width = width; };
@@ -49,6 +49,6 @@ public:
 
 	// virtual void draw(Graphics &g, int x, int y, size_t z){};
 
-	Control(short left, short top, short with, short height, BorderDrawer *border, Color textColor, Color BgColor) {}
+	Control(short left, short top, short width, short height, BorderDrawer *border, Color textColor, Color BgColor);
 	virtual ~Control() = 0;
 };
