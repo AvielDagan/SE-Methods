@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Panel.hpp"
-#include "Label.hpp"
-#include "Button.hpp"
+#include "Panel.h"
+#include "Label.h"
+#include "Button.h"
 
 class ComboBox : public Panel
 {

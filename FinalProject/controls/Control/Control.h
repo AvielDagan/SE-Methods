@@ -1,9 +1,9 @@
 #pragma once
 
 #include <vector>
-#include "Graphics.hpp"
-#include "../BorderDrawer/BorderDrawer.hpp"
-#include "../Observer/Observer.hpp"
+#include "Graphics.h"
+#include "../BorderDrawer/BorderDrawer.h"
+#include "../Observer/Observer.h"
 
 using namespace std;
 

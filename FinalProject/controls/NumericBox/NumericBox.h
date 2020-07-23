@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Panel.hpp"
-#include "Button.hpp"
-#include "Label.hpp"
+#include "Panel.h"
+#include "Button.h"
+#include "Label.h"
 
 class NumericBox : public Panel
 {

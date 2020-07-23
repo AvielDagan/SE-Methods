@@ -1,7 +1,7 @@
 #include <string>
 #include <windows.h>
 #include <iostream>
-#include "defindes.hpp"
+#include "defindes.h"
 
 using namespace std;
 

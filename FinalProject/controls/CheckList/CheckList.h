@@ -1,9 +1,9 @@
 #pragma once
 
 #include <vector>
-#include "../Panel/Panel.hpp"
-#include "../Label/Label.hpp"
-#include "../CheckBox/CheckBox.hpp"
+#include "../Panel/Panel.h"
+#include "../Label/Label.h"
+#include "../CheckBox/CheckBox.h"
 
 using namespace std;
 

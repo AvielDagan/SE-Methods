@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "Label.hpp"
+#include "Label.h"
 
 class TextBox : public Label
 {

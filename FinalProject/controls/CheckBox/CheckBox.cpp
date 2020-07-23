@@ -1,4 +1,4 @@
-#include "./CheckBox.hpp"
+#include "./CheckBox.h"
 
 CheckBox::CheckBox(Label title, Button box)
 {

@@ -1,4 +1,4 @@
-#include "./CheckList.hpp"
+#include "./CheckList.h"
 
 CheckList::CheckList(/* args */)
 {

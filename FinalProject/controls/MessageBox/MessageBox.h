@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../Panel/Panel.hpp"
-#include "../Label/Label.hpp"
-#include "../Button/Button.hpp"
+#include "../Panel/Panel.h"
+#include "../Label/Label.h"
+#include "../Button/Button.h"
 
 
 //need to call it in different name... it seemes MessageBox already defined

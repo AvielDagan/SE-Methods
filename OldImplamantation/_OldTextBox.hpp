@@ -2,7 +2,7 @@
 #include <windows.h>
 #include <iostream>
 #include <iomanip>
-#include "defindes.hpp"
+#include "defindes.h"
 
 using namespace std;
 

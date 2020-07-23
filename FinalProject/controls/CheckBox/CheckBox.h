@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Label/Label.hpp"
-#include "../Button/Button.hpp"
+#include "../Label/Label.h"
+#include "../Button/Button.h"
 
 class CheckBox
 {

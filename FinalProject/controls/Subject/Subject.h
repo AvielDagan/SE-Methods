@@ -1,7 +1,7 @@
 #pragma one
 
 #include <vector>
-#include "../Observer/Observer.hpp"
+#include "../Observer/Observer.h"
 #include <memory>
 
 using namespace std;

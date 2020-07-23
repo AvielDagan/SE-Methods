@@ -1,9 +1,9 @@
 #include <windows.h>
 #include <stdio.h>
 #include "Label.h"
-#include "TextBox.hpp"
-#include "controller.hpp"
-#include "Checkbox.hpp"
+#include "TextBox.h"
+#include "controller.h"
+#include "Checkbox.h"
 
 HANDLE hStdin;
 DWORD fdwSaveOldMode;

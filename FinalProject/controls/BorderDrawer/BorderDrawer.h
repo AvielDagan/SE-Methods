@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Graphics/Graphics.hpp"
+#include "../Graphics/Graphics.h"
 
 
 struct BorderDrawer {

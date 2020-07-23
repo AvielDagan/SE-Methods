@@ -1,6 +1,6 @@
 #pragma one
 #include <iostream> 
-#include "Subject/Subject.hpp"
+#include "Subject/Subject.h"
 using namespace std;
 
 int main() {

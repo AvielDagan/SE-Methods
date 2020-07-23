@@ -1,4 +1,4 @@
-#include "./RadioBox.hpp"
+#include "./RadioBox.h"
 
 RadioBox::RadioBox()
 {

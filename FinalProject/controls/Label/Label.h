@@ -1,6 +1,7 @@
+#pragma once
 #include <string>
-#include "Control.hpp"
-#include "Subject.hpp"
+#include "Control.h"
+#include "Subject.h"
 
 using namespace std;
 
@@ -14,7 +15,7 @@ public:
     void setTitle(string);
     void draw(Graphics &g, int x, int y, size_t z); //inherits from Control
 
-    Label(string);
+    Label(short left, short top, short width, string value);
     Label();
     ~Label();
 };

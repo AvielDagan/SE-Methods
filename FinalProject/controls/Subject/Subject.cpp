@@ -1,5 +1,5 @@
 #pragma one
-#include "./Subject.hpp"
+#include "./Subject.h"
 #include <iostream>
 using namespace std;
 

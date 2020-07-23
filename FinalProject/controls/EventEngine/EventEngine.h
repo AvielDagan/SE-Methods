@@ -3,8 +3,8 @@
 #include <windows.h>
 #include <vector>
 #include <algorithm>
-#include "../Control/Control.hpp"
-#include "../Graphics/Graphics.hpp"
+#include "../Control/Control.h"
+#include "../Graphics/Graphics.h"
 
 class EventEngine
 {

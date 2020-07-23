@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <windows.h>
-#include "../Control/Control.hpp"
+#include "../Control/Control.h"
 
 using namespace std;
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "CheckList.hpp"
-#include "CheckBox.hpp"
+#include "CheckList.h"
+#include "CheckBox.h"
 
 class RadioBox:public CheckList
 {

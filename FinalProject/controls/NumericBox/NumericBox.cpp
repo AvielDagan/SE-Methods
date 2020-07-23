@@ -1,4 +1,4 @@
-#include "./NumericBox.hpp"
+#include "./NumericBox.h"
 
 NumericBox::NumericBox()
 {

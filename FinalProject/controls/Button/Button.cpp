@@ -1,8 +1,7 @@
-#include "./Button.hpp"
-#include <iosteam>
+#include "./Button.h"
 
 
-Button::Button(Label label): Label(label)
+Button::Button(short left, short top, short width,Label label): Label(label)
 {
 }
 

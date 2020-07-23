@@ -1,4 +1,4 @@
-#include "./ComboBox.hpp"
+#include "./ComboBox.h"
 
 ComboBox::ComboBox()
 {
