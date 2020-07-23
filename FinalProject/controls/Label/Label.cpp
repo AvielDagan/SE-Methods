@@ -1,11 +1,11 @@
 #include <iostream>
 #include "Label.hpp"
 
-Label::Label(string title) : Control(), Subject(), title(title) {};
+Label::Label(short left, short top, short width, string value) : Control(left, top, width), Subject(), title(title){};
 
 string Label::getTitle()
 {
-    return this->title;
+    return title;
 }
 
 void Label::setTitle(string title)
@@ -13,10 +13,9 @@ void Label::setTitle(string title)
     this->title = title;
 }
 
-
-void Label::draw(Graphics& g, int x, int y, size_t z)
+void Label::draw(Graphics &g, int x, int y, size_t z)
 {
     if (!z)
-        g.write(this->title);
-
+        Control::draw(g, x, y, z);
+    g.write(x + 1, y + 1, title);
 }
