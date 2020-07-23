@@ -17,12 +17,14 @@ void EventEngine::run(Control &c)
 		{
 			_graphics.clearScreen();
 			_graphics.setCursorVisibility(false);
+			// cout << "inside redraw" << endl;
 			for (size_t z = 0; z < 5; ++z)
 			{
 				c.draw(_graphics, 0, 0,0,0, z);
 			}	
 			redraw = false;
 		}
+		// cout << "after redrawwwwwwwww" << endl;
 
 		INPUT_RECORD record;
 		DWORD count;
