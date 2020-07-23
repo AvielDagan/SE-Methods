@@ -17,7 +17,7 @@ public:
     bool addSelectedItem(CheckBox);
     bool removeSelectedItem(CheckBox);
     vector<CheckBox> getSelectedCheckBoxes();
-    CheckList(/* args */);
+    CheckList(short left,short top,short width, short height, BorderDrawer* border, Color textColor, Color BgColor, size_t layer);
     ~CheckList();
 };
 

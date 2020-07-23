@@ -2,10 +2,8 @@
 
 class Observer
 {
-private:
-    
 public:
-    virtual void notify(int keyCode);
+    // virtual void notify(int keyCode);
     Observer();
     ~Observer();
 };

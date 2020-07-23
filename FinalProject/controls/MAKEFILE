@@ -1,6 +1,0 @@
-# all: BorderDrawer Button CheckBox CheckList ComboBox Control EventEngine Graphics Label MessageBox NumericBox Observer Panel RadioBox Subject TextBox main
-all: Observer Subject main
-
-Observer: Observer/Observer.cpp
-Subject: Subject/Subject.cpp
-main: main.cpp
