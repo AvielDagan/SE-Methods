@@ -10,8 +10,8 @@ public:
 	BorderDrawer(char topLeft, char topRight, char bottomLeft, char bottomRight, char horizontal, char vertical) :
     topLeft(topLeft), topRight(topRight), bottomLeft(bottomLeft), bottomRight(bottomRight), horizontal(horizontal),
     vertical(vertical) {} ;
-	
-	virtual void drawBorder(Graphics &g, short left, short top, int width, int height)
+
+	virtual void draw(Graphics &g, short left, short top, int width, int height)
 	{
 		string line(width, horizontal);
 		string space(width, ' ');
