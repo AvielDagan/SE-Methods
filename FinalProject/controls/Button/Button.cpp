@@ -1,4 +1,4 @@
-#include "./Button.h"
+#include "./Button.hpp"
 #include <iostream>
 
 Button::Button(short left, short top, short with, Label label) : Label(label)
