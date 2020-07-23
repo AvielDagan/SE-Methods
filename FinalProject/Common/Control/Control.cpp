@@ -19,10 +19,10 @@ void Control::setFocus(Control &control)
     _focused = &control;
 }
 
-void Control::draw(Graphics &graphics, short left, short top, int width, int height, size_t layer)
+void Control::draw(Graphics &graphics, short left, short top, short width, short height, size_t layer)
 {
     graphics.setForeground(getTextColor());
     graphics.setBackground(getBgColor());
     graphics.setCursorVisibility(false);
-    _border->draw(graphics, left, top, width, height)
+    _border->drawBorder(graphics, left, top, width, height);
 }

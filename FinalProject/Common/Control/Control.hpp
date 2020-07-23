@@ -43,7 +43,7 @@ public:
 	void setTextColor(Color textColor) { this->_textColor = textColor; };
 	void setBgColor(Color BgColor) { this->_BgColor = BgColor; };
 
-	virtual void draw(Graphics &g, short left, short top, int width, int height, size_t layer);
+	virtual void draw(Graphics &g, short left, short top, short width, short height, size_t layer);
 	virtual void keyDown(int keyCode, char charecter){};
 	virtual void getAllControls(vector<Control *> *controls){};
 
