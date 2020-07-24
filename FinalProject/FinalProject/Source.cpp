@@ -13,14 +13,16 @@
 int main(int argc, char const *argv[])
 {
 
-    DoubleBorderDrawer* dbd = new DoubleBorderDrawer;
+    DoubleBorderDrawer *dbd = new DoubleBorderDrawer;
     // BorderDrawer* sbd = new SingleBorderDrawer;
-    Panel panel(0,0,20,20,dbd,Color::Cyan, Color::Black,1);
-    Label l(5,5,5,5,dbd, Color::Cyan, Color::Black,"test label");
-    Button b(10,10,5,5,dbd, Color::Cyan, Color::Black,"test Button");
-    EventEngine engine;
+    Panel panel(0, 0, 0, 0, dbd, Color::White, Color::Black, 1);
+
+    Label l(5, 5, 5, 5, dbd, Color::Cyan, Color::Black, "test label");
+    Button b(10, 10, 5, 5, dbd, Color::Cyan, Color::Black, "test Button");
+
     panel.addControl(&b);
     panel.addControl(&l);
+    EventEngine engine;
     engine.run(panel);
     return 0;
 }
