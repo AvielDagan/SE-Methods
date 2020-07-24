@@ -2,14 +2,15 @@
 
 Control *Control::_focused = NULL;
 
-Control::Control(short left, short top, short width, short height, BorderDrawer *border, Color textColor, Color BgColor) : _left(left), _top(top), _width(width), _height(height), _border(border), _textColor(textColor), _BgColor(BgColor) {}
+Control::Control(short left, short top, short width, short height, BorderDrawer *border, Color textColor, Color BgColor) : _left(left), _top(top), _width(width), _height(height), _border(border), _textColor(textColor), _BgColor(BgColor) {
+}
 
 Control::~Control()
 {
-    // if (_border)
-    // {
-    //     delete _border;
-    // }
+    if (_border)
+    {
+        delete _border;
+    }
 }
 
 // static void Control::setFocus(Control &control)
