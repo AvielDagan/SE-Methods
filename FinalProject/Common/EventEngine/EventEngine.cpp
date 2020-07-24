@@ -7,15 +7,17 @@ EventEngine::EventEngine(DWORD input, DWORD output)
 {
 	GetConsoleMode(_console, &_consoleMode);
 	SetConsoleMode(_console, ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT);
+	
 }
 
 void EventEngine::run(Control &c)
 {
-	for (bool redraw = true;;)
+	bool redraw = true;
+	for (redraw;redraw != false;)
 	{
 		if (redraw)
 		{
-			_graphics.clearScreen();
+			// _graphics.clearScreen(); // This function crashes the app
 			_graphics.setCursorVisibility(false);
 			// cout << "inside redraw" << endl;
 			for (size_t z = 0; z < 5; ++z)
@@ -24,7 +26,6 @@ void EventEngine::run(Control &c)
 			}	
 			redraw = false;
 		}
-		// cout << "after redrawwwwwwwww" << endl;
 
 		INPUT_RECORD record;
 		DWORD count;

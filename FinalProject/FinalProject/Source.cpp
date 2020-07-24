@@ -12,17 +12,17 @@
 
 int main(int argc, char const *argv[])
 {
-    EventEngine engine;
+
     DoubleBorderDrawer *dbd = new DoubleBorderDrawer;
     // BorderDrawer* sbd = new SingleBorderDrawer;
     Panel panel(0, 0, 0, 0, dbd, Color::White, Color::Black, 1);
-    engine.run(panel);
-    // Label l(5, 5, 5, 5, dbd, Color::Cyan, Color::Black, "test label");
-    // Button b(10, 10, 5, 5, dbd, Color::Cyan, Color::Black, "test Button");
-    // std::cout << "printing" << std::endl;
-    
-    // panel.addControl(&b);
-    // panel.addControl(&l);
 
+    Label l(5, 5, 5, 5, dbd, Color::Cyan, Color::Black, "test label");
+    Button b(10, 10, 5, 5, dbd, Color::Cyan, Color::Black, "test Button");
+
+    panel.addControl(&b);
+    panel.addControl(&l);
+    EventEngine engine;
+    engine.run(panel);
     return 0;
 }

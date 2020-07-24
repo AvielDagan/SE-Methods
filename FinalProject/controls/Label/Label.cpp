@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Label.hpp"
 
-Label::Label(short left, short top, short width, short height,BorderDrawer *border, Color textColor, Color BgColor, string value) : Control(left, top, width, height, border, textColor, BgColor), Subject(), title(title){};
+Label::Label(short left, short top, short width, short height,BorderDrawer *border, Color textColor, Color BgColor, string value) : Control(left, top, width, height, border, textColor, BgColor), Subject(), title(value){}
 
 string Label::getTitle()
 {
