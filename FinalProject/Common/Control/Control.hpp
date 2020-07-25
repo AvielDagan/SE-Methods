@@ -4,6 +4,7 @@
 #include "../Graphics/Graphics.hpp"
 #include "../../controls/BorderDrawer/BorderDrawer.hpp"
 #include "../../controls/Observer/Observer.hpp"
+#include <iostream>
 
 using namespace std;
 
@@ -23,7 +24,7 @@ protected:
 public:
 	//static and virtual  implemented in the hpp file
 
-	virtual bool canGetFocus() { return false; };
+	virtual bool canGetFocus() { return true; };
 
 	static Control *getFocus() { return _focused; };
 	virtual short getLeft() { return _left; };
@@ -45,7 +46,7 @@ public:
 	void setBgColor(Color BgColor) { this->_BgColor = BgColor; };
 
 	virtual void draw(Graphics &g, short left, short top, size_t layer);
-	virtual void keyDown(int keyCode, char charecter){};
+	virtual void keyDown(int keyCode, char charecter){cout << "key!";};
 	virtual void getAllControls(vector<Control *> *controls){};
 
 	// virtual void draw(Graphics &g, int x, int y, size_t z){};
