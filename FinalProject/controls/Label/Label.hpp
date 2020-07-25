@@ -11,11 +11,11 @@ private:
     string title;
 
 public:
+    Label(short left, short top, short width,  BorderDrawer *border, Color textColor, Color BgColor, string value);
     string getTitle();
-    void setTitle(string);
-    void draw(Graphics &g, short left, short top, short width, short height, size_t z); //inherits from Control
+    void setTitle(string s);
+    void draw(Graphics &g, short left, short top, size_t z); //inherits from Control
 
 
-    Label(short left, short top, short width, short height, BorderDrawer *border, Color textColor, Color BgColor, string value);
     // ~Label();
 };
