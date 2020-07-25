@@ -9,10 +9,10 @@ Control::Control(short left, short top, short width, short height, BorderDrawer 
 
 Control::~Control()
 {
-    if (_border)
-    {
-        delete _border;
-    }
+    // if (_border)
+    // {
+    //     delete _border;
+    // }
 }
 
 // static void Control::setFocus(Control &control)

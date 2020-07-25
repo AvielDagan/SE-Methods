@@ -15,6 +15,7 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
+    EventEngine engine;
 
     DoubleBorderDrawer *dbd = new DoubleBorderDrawer;
     // BorderDrawer* sbd = new SingleBorderDrawer;
@@ -32,6 +33,9 @@ int main(int argc, char const *argv[])
     // cout << "panel.getWidth() -> " << panel.getWidth() << endl;
     // cout << "panel.getHeight() -> " << panel.getHeight() << endl;  
     engine.run(panel);
+    // while(1){
+    //     std::cout << " blabla" << std::endl;    
+    // }    
     
     return 0;
 }
