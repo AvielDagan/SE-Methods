@@ -24,7 +24,7 @@ protected:
 public:
 	//static and virtual  implemented in the hpp file
 
-	virtual bool canGetFocus() { return true; };
+	virtual bool canGetFocus() { return false; };
 
 	static Control *getFocus() { return _focused; };
 	virtual short getLeft() { return _left; };

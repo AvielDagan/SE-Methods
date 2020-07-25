@@ -23,8 +23,8 @@ public:
     // notify();
 
 private:
-    vector<Control *> controls;
-    vector<Control *> controllersLocation;
+    vector<Control*> controls;
+    vector<Control*> controllersLocation;
     void panelSize();
     int focusIndex;
 };

@@ -6,13 +6,13 @@ TextBox::TextBox()
 TextBox::~TextBox()
 {
 }
-string TextBox::getInputValue()
-{
-}
-void TextBox::setInputValue(string)
-{
-}
-void TextBox::getInputFromKB(string)
-{
+// string TextBox::getInputValue()
+// {
+// }
+// void TextBox::setInputValue(string)
+// {
+// }
+// void TextBox::getInputFromKB(string)
+// {
 
-} //is needed?
+// } //is needed?
