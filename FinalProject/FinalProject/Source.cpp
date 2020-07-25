@@ -25,8 +25,8 @@ int main(int argc, char const *argv[])
     Button c(10, 10, 10, dbd, Color::Cyan, Color::Black, "test Button2");
     // std::cout << "printing" << std::endl;
     MessageAlert ma(0,0,15,sbd,dbd,Color::Cyan, Color::Black,"message","OK","CANCEL",&b);
-    panel.addControl(&b);
     panel.addControl(&c);
+    panel.addControl(&b);
     // panel.addControl(&l);
     // panel.addControl(&ma);
     // panel.addControl(&ll);

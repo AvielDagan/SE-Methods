@@ -13,11 +13,31 @@ Control *Panel::getControls(int i)
 {
     return controls[i];
 }
-void Panel::addControl(Control *control)
+bool Panel::addControl(Control *control)
 {
-    controls.push_back(control);
-    setFocus(*control);
+    if (control != nullptr)
+    {
+        try
+        {
+            controls.push_back(control);
+            if (getFocus() == nullptr && control->canGetFocus())
+            {
+                setFocus(*control);
+            }
+        }
+        catch (...)
+        {
+            return false;
+        }
+        return true;
+    }
+    return false;
 }
+// bool Panel::addControl(Control *control)
+// {
+//     controls.push_back(control);
+//     setFocus(*control);
+// }
 COORD Panel::getControlLocation()
 {
 }

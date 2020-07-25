@@ -11,7 +11,7 @@ class Panel : public Control
 public:
     Panel(short left, short top, BorderDrawer *border, Color textColor, Color BgColor, size_t layer);
     ~Panel();
-    void addControl(Control *control);
+    bool addControl(Control *control);
     Control *getControls(int i);
     int getFocusIndex();
 

@@ -15,9 +15,10 @@ Control::~Control()
     }
 }
 
-// static void Control::setFocus(Control &control)
-// { //! check for errors!
-//     _focused = &control;
+// void Control::setFocus(Control& control) {
+//     if((_focused != &control) && (control.canGetFocus() )) {
+//         _focused = &control;
+//     }
 // }
 
 void Control::draw(Graphics &graphics, short left, short top, size_t layer)
