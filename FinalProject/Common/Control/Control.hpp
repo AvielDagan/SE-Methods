@@ -33,8 +33,9 @@ public:
 	BorderDrawer *getBorder() { return _border; };
 	Color getTextColor() { return _textColor; };
 	Color getBgColor() { return _BgColor; };
+	virtual int getFocusIndex() { return -1; };
 
-	static void setFocus(Control &control){_focused = &control;};
+	static void setFocus(Control &control) { _focused = &control; };
 	virtual void setLeft(short left) { this->_left = left; };
 	virtual void setTop(short top) { this->_top = top; };
 	virtual void setWidth(short width) { this->_width = width; };
@@ -43,7 +44,7 @@ public:
 	void setTextColor(Color textColor) { this->_textColor = textColor; };
 	void setBgColor(Color BgColor) { this->_BgColor = BgColor; };
 
-	virtual void draw(Graphics &g, short left, short top, short width, short height, size_t layer);
+	virtual void draw(Graphics &g, short left, short top, size_t layer);
 	virtual void keyDown(int keyCode, char charecter){};
 	virtual void getAllControls(vector<Control *> *controls){};
 

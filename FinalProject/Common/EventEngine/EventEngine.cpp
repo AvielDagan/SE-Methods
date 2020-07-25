@@ -15,21 +15,16 @@ void EventEngine::run(Control &c)
 	{
 		if (redraw)
 		{
-			_graphics.clearScreen();
-			_graphics.setCursorVisibility(false);
 			_graphics.setForeground(Color::White);
 			_graphics.setBackground(Color::Black);
-			// cout << "inside redraw" << endl;
+			_graphics.clearScreen();
+			_graphics.setCursorVisibility(false);
 			for (size_t z = 0; z < 5; ++z)
 			{
-				// std::cout << "c.getLeft() " << c.getLeft() << std::endl;
-				// std::cout << "c.getTop() " << c.getTop() << std::endl;
-				// c.draw(_graphics, c.getLeft(), c.getTop(), c.getLeft(), c.getTop(), z);
-				c.draw(_graphics, c.getLeft(), c.getTop(), c.getLeft(), c.getTop(), z);
+				c.draw(_graphics, c.getLeft(), c.getTop(), z);
 			}
 			redraw = false;
 		}
-		// cout << "after redrawwwwwwwww" << endl;
 
 		INPUT_RECORD record;
 		DWORD count;
@@ -39,7 +34,7 @@ void EventEngine::run(Control &c)
 		case KEY_EVENT:
 		{
 			auto f = Control::getFocus();
-			if (f != nullptr && record.Event.KeyEvent.bKeyDown)
+			if (f != nullptr && record.Event.KeyEvent.bKeyDown /*&& c.getMessageBoxLock() == false*/)
 			{
 				auto code = record.Event.KeyEvent.wVirtualKeyCode;
 				auto chr = record.Event.KeyEvent.uChar.AsciiChar;
@@ -51,6 +46,7 @@ void EventEngine::run(Control &c)
 			}
 			break;
 		}
+		
 		default:
 			break;
 		}

@@ -8,18 +8,23 @@ using namespace std;
 
 class Panel : public Control
 {
-private:
-    vector<Control*> controls;
-    vector<Control*> controllersLocation;
-
 public:
-    vector<Control*> getControls();
-    void addControl(Control* control);
+    Panel(short left, short top, BorderDrawer *border, Color textColor, Color BgColor, size_t layer);
+    ~Panel();
+    void addControl(Control *control);
+    Control *getControls(int i);
+    int getFocusIndex();
+
+    virtual void draw(Graphics &g, short left, short top, size_t z);
+    virtual void keyDown(int keyCode, char charecter);
+    virtual void getAllControls(vector<Control *> *controls);
     COORD getControlLocation();
     void setControlLocation(COORD);
-    void draw(Graphics& g,short left, short top,size_t z);
-    void panelSize();
     // notify();
-    Panel(short left,short top,short width, short height, BorderDrawer* border, Color textColor, Color BgColor, size_t layer);
-    ~Panel();
+
+private:
+    vector<Control *> controls;
+    vector<Control *> controllersLocation;
+    void panelSize();
+    int focusIndex;
 };
