@@ -7,14 +7,17 @@ EventEngine::EventEngine(DWORD input, DWORD output)
 {
 	GetConsoleMode(_console, &_consoleMode);
 	SetConsoleMode(_console, ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT);
+	
 }
 
 void EventEngine::run(Control &c)
 {
-	for (bool redraw = true;;)
+	bool redraw = true;
+	for (redraw;redraw != false;)
 	{
 		if (redraw)
 		{
+
 			_graphics.setForeground(Color::White);
 			_graphics.setBackground(Color::Black);
 			_graphics.clearScreen();

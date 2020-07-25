@@ -15,9 +15,10 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    EventEngine engine;
+
     DoubleBorderDrawer *dbd = new DoubleBorderDrawer;
     // BorderDrawer* sbd = new SingleBorderDrawer;
+
     Panel panel(0, 0, dbd, Color::White, Color::Black, 0);
     Label l(0, 15, 10, dbd, Color::Cyan, Color::Black, "test label");
     // Label ll(10, 10, 10, 10, dbd, Color::Cyan, Color::Black, "test label");
@@ -32,7 +33,5 @@ int main(int argc, char const *argv[])
     // cout << "panel.getHeight() -> " << panel.getHeight() << endl;  
     engine.run(panel);
     
-    while(1);
-
     return 0;
 }

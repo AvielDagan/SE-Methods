@@ -1,8 +1,10 @@
 #include <iostream>
 #include "Label.hpp"
+
 // 1 ?
 Label::Label(short left, short top, short width, BorderDrawer *border, Color textColor, Color BgColor, string value)
     : Control(left, top, width, 1, border, textColor, BgColor), Subject(), title(value){};
+
 
 string Label::getTitle()
 {
