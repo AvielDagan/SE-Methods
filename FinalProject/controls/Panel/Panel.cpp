@@ -16,7 +16,6 @@ Control *Panel::getControls(int i)
 void Panel::addControl(Control *control)
 {
     controls.push_back(control);
-    // setFocus(*control);
 }
 COORD Panel::getControlLocation()
 {
@@ -42,17 +41,17 @@ void Panel::draw(Graphics &g, short left, short top, size_t z)
             controls[i]->draw(g, left + controlLeft + 1, top + controlTop + 1, z);
         }
     }
-    // if (z == 1)
-    // {
-    //     if (getFocusIndex() != -1)
-    //     {
-    //         controlLeft = controls[focusIndex]->getLeft();
-    //         controlTop = controls[focusIndex]->getTop();
-    //         g.setForeground(controls[focusIndex]->getTextColor());
-    //         g.setBackground(controls[focusIndex]->getBgColor());
-    //         controls[focusIndex]->draw(g, left + controlLeft + 1, top + controlTop + 1, 0);
-    //     }
-    // }
+    if (z == 1)
+    {
+        if (getFocusIndex() != -1)
+        {
+            controlLeft = controls[focusIndex]->getLeft();
+            controlTop = controls[focusIndex]->getTop();
+            g.setForeground(controls[focusIndex]->getTextColor());
+            g.setBackground(controls[focusIndex]->getBgColor());
+            controls[focusIndex]->draw(g, left + controlLeft, top + controlTop, 0);
+        }
+    }
 }
 
 int Panel::getFocusIndex()
