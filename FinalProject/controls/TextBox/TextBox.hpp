@@ -9,6 +9,7 @@ private:
     string input;
 
 public:
+    COORD currentCoord;
     string getInputValue();
     void setInputValue(string);
     void getInputFromKB(string); //is needed?
