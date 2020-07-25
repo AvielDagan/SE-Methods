@@ -22,15 +22,16 @@ int main(int argc, char const *argv[])
     Panel panel(0, 0, dbd, Color::White, Color::Black, 0);
     Label l(0, 15, 10, dbd, Color::Cyan, Color::Black, "test label");
     // Label ll(10, 10, 10, 10, dbd, Color::Cyan, Color::Black, "test label");
-    // Button b(10, 10, 5, 5, dbd, Color::Cyan, Color::Black, "test Button");
+    Button b(10, 10, 5, 5, dbd, Color::Cyan, Color::Black, "test Button");
     // std::cout << "printing" << std::endl;
     
-    // panel.addControl(&b);
+    panel.addControl(&b);
     panel.addControl(&l);
     // panel.addControl(&ll);
 
     // cout << "panel.getWidth() -> " << panel.getWidth() << endl;
     // cout << "panel.getHeight() -> " << panel.getHeight() << endl;  
+    EventEngine engine;
     engine.run(panel);
     
     return 0;
