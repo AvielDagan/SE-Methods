@@ -18,7 +18,7 @@ public:
     virtual void draw(Graphics &g, short left, short top, size_t z);
     virtual void keyDown(int keyCode, char charecter);
     virtual void getAllControls(vector<Control *> *controls);
-    COORD getControlLocation();
+    // COORD getControlLocation();
     void setControlLocation(COORD);
     // notify();
 

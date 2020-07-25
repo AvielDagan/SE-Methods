@@ -9,7 +9,8 @@
 #include "../controls/Panel/Panel.hpp"
 #include "../controls/MessageAlert/MessageAlert.hpp"
 #include "../controls/DoubleBorderDrawer/DoubleBorderDrawer.hpp"
-#include <iostream>
+#include "../controls/NumericBox/NumericBox.hpp"
+// #include <iostream>
 using namespace std;
 
 int main(int argc, char const *argv[])
@@ -20,17 +21,12 @@ int main(int argc, char const *argv[])
 
     Panel panel(0, 0, dbd, Color::White, Color::Black, 0);
     // Label l(0, 15, 10, dbd, Color::Cyan, Color::Black, "test label");
-    // Label ll(10, 10, 10, 10, dbd, Color::Cyan, Color::Black, "test label");
-    Button b(10, 10, 5, 5, dbd, Color::Cyan, Color::Black, "test Button");
-    // std::cout << "printing" << std::endl;
+    Button b(0, 0, 5, 5, dbd, Color::Cyan, Color::Black, "test Button");
     MessageAlert ma(0,0,15,sbd,dbd,Color::Cyan, Color::Black,"message","OK","CANCEL",&b);
+    NumericBox nb(0,0,0,100,dbd, Color::White, Color::Black);
     panel.addControl(&b);
-    // panel.addControl(&l);
-    panel.addControl(&ma);
-    // panel.addControl(&ll);
-
-    // cout << "panel.getWidth() -> " << panel.getWidth() << endl;
-    // cout << "panel.getHeight() -> " << panel.getHeight() << endl;  
+    panel.addControl(&ma); 
+    panel.addControl(&nb);
     EventEngine engine;
     engine.run(panel);
     

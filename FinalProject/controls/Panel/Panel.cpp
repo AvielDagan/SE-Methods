@@ -2,7 +2,7 @@
 #include <iostream>
 
 Panel::Panel(short left, short top, BorderDrawer *border, Color textColor, Color BgColor, size_t layer)
-    : Control(left, top, 1, 1, border, textColor, BgColor)
+    : Control(left, top, 0, 0, border, textColor, BgColor)
 {
     panelSize();
 }
@@ -17,9 +17,9 @@ void Panel::addControl(Control *control)
 {
     controls.push_back(control);
 }
-COORD Panel::getControlLocation()
-{
-}
+// COORD Panel::getControlLocation()
+// {
+// }
 void Panel::setControlLocation(COORD)
 {
 }
