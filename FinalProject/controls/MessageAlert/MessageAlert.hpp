@@ -10,7 +10,7 @@ class MessageAlert : public Panel
 {
 private:
     Label message;
-    Button ok;
+    Button okBtn;
     Button cancel;
     string returnValue;
     Button *showButton;
@@ -22,6 +22,7 @@ public:
     void setMessage(string message);
     string getReturnValue() { return returnValue; };
     void setShowButton(Button *button);
+    void notify(string text);
 
     virtual void draw(Graphics &g, int x, int y, size_t z);
     MessageAlert(short left, short top, short width, BorderDrawer *buttonBorder, BorderDrawer *border, Color textColor, Color backgroundColor, string message, string ok, string cancel, Button *showButton);

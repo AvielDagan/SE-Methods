@@ -4,13 +4,13 @@ using namespace std;
 MessageAlert::MessageAlert(short left, short top, short width,BorderDrawer* buttonBorder, BorderDrawer* border, Color textColor, Color backgroundColor, string message, string ok, string cancel, Button* showButton) 
 :   Panel(left + 5, top + 5, border, textColor, backgroundColor),
     message(Label((width - message.size()) / 2, 0, message.size(),buttonBorder, textColor, backgroundColor, message)),
-    ok(Button(0, 4, ok.size(), buttonBorder, Color::White, Color::Green, ok)),
-    cancel(Button(width - cancel.size() - 2, 4,5,  buttonBorder, Color::White, Color::Red, cancel)),
+    okBtn(Button(0, 4, ok.size(), buttonBorder, Color::White, Color::Green, ok,this)),
+    cancel(Button(width - cancel.size() - 2, 4,5,  buttonBorder, Color::White, Color::Red, cancel,this)),
     showButton(showButton) 
     {
         // Panel:addControl(this);
         Panel::addControl(&this->message);
-        Panel::addControl(&this->ok);
+        Panel::addControl(&this->okBtn);
         Panel::addControl(&this->cancel);
         returnValue = "";
         // show = false;
@@ -39,11 +39,18 @@ void MessageAlert::draw(Graphics& g, int x, int y, size_t z) {
         relativeY = message.getTop();
         // cout << "                                                                                                                                                                                   @!@!" << endl;
         message.draw(g, x + relativeX + 1, y + relativeY + 1, z);
-        relativeX = ok.getLeft();
-        relativeY = ok.getTop();
-        ok.draw(g, x + relativeX + 1, y + relativeY + 1, z);
+        relativeX = okBtn.getLeft();
+        relativeY = okBtn.getTop();
+        okBtn.draw(g, x + relativeX + 1, y + relativeY + 1, z);
         relativeX = cancel.getLeft();
         relativeY = cancel.getTop();
         cancel.draw(g, x + relativeX + 1, y + relativeY + 1, z);
     }
 }
+
+
+void MessageAlert::notify(string text) {
+    if(text == "OK") {
+        cout << "                                                                                               !@##!!@#" << endl;
+    }
+} 

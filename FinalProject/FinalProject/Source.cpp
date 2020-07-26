@@ -22,8 +22,8 @@ int main(int argc, char const *argv[])
     Panel panel(0, 0, dbd, Color::White, Color::Black);
     // Label l(0, 15, 10, dbd, Color::Cyan, Color::Black, "test label");
     // Label ll(10, 10, 10, 10, dbd, Color::Cyan, Color::Black, "test label");
-    Button b(5, 5, 10, dbd, Color::Cyan, Color::Black, "test Button");
-    Button c(10, 10, 10, dbd, Color::Cyan, Color::Black, "test Button2");
+    Button b(5, 5, 10, dbd, Color::Cyan, Color::Black, "test Button",NULL);
+    Button c(10, 10, 10, dbd, Color::Cyan, Color::Black, "test Button2",NULL);
     TextBox TB(30, 0, 10, sbd, Color::White, Color::Cyan); // ?
     TextBox TB2(5, 0, 10, sbd, Color::White, Color::Cyan); // ?
     // std::cout << "printing" << std::endl;

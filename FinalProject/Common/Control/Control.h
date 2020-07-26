@@ -4,6 +4,7 @@
 #include "../Graphics/Graphics.hpp"
 #include "../../Controls/BorderDrawer/BorderDrawer.hpp"
 #include "../../controls/Observer/Observer.hpp"
+#include <string>
 
 using namespace std;
 
@@ -41,11 +42,14 @@ public:
 	void setBackgroundColor(Color backgroundColor) { this->backgroundColor = backgroundColor; };
 
 	virtual void draw(Graphics &g, int x, int y, size_t z);
+	virtual void drawFocus(Graphics &g, int x, int y, size_t z);
 	virtual void mousePressed(int x, int y, bool isLeft){};
 	virtual void keyDown(int keyCode, char charecter){};
 	virtual void getAllControls(vector<Control *> *controls){};
 	virtual bool canGetFocus() { return false; };
 	virtual int getFocusIndex() { return -1; };
+	
+	// virtual void notify(string text){};
 
 protected:
 	static Control *focusedControl;
