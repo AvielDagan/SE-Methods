@@ -9,16 +9,16 @@ Subject::Subject()
 Subject::~Subject()
 {
 }
-void Subject::addObserver(shared_ptr<Observer> observer)
+void Subject::addObserver(Observer* observer)
 {
     if (observer != NULL)
         observers.push_back(observer);
 }
-void Subject::actions(int keyCode)
+void Subject::actions(string text)
 {
     for (auto const &value : observers)
     {
-        // value->notify(keyCode);
+        value->notify(text);
     }
 }
 // not sure if need this method 
