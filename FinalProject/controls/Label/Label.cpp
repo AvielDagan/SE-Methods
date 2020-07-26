@@ -1,28 +1,20 @@
+#include "Label.h"
 #include <iostream>
-#include "Label.hpp"
 
-// 1 ?
-Label::Label(short left, short top, short width, BorderDrawer *border, Color textColor, Color BgColor, string value)
-    : Control(left, top, width, 1, border, textColor, BgColor), Subject(), title(value){};
+Label::Label(short left, short top, short width, BorderDrawer* border, Color textColor, Color backgroundColor, string value) :
+    Control(left, top, width, 1, border, textColor, backgroundColor), value(value) {};
 
-
-string Label::getTitle()
-{
-    return this->title;
+string Label::getValue() {
+    return this->value;
 }
 
-// Label::~Label(){}
-
-void Label::setTitle(string title)
-{
-    this->title = title;
+void Label::setValue(string value) {
+    this->value = value;
 }
 
-void Label::draw(Graphics &g, short left, short top, size_t z)
-{
-    if (z == 0)
-    {
-        Control::draw(g, left, top, z);
-        g.write(left + 1, top + 1, title);
+void Label::draw(Graphics& g, int x, int y, size_t z) {
+    if (z == 0) {
+        Control::draw(g, x, y, z);
+        g.write(x + 1, y + 1, value);
     }
 }
