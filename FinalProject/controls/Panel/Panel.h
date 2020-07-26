@@ -13,6 +13,7 @@ class Panel : public Control {
         bool addControl(Control* control);
         Control* getControl(int index);
         int getFocusIndex();
+        void cleanVec();
 
         virtual void draw(Graphics& g, int x, int y, size_t z);
 		virtual void mousePressed(int x, int y, bool isLeft);

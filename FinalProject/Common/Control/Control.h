@@ -29,6 +29,7 @@ public:
 	virtual short getTop() { return top; };
 	virtual short getWidth() { return width; };
 	virtual short getHeight() { return height; };
+	bool getShow() {return show;};
 	BorderDrawer *getBorder() { return border; };
 	Color getTextColor() { return textColor; };
 	Color getBackgroundColor() { return backgroundColor; };
@@ -40,6 +41,7 @@ public:
 	void setBorder(BorderDrawer *border);
 	void setTextColor(Color textColor) { this->textColor = textColor; };
 	void setBackgroundColor(Color backgroundColor) { this->backgroundColor = backgroundColor; };
+	void setShow(bool f);
 
 	virtual void draw(Graphics &g, int x, int y, size_t z);
 	virtual void drawFocus(Graphics &g, int x, int y, size_t z);
@@ -62,4 +64,5 @@ protected:
 	BorderDrawer *border;
 	Color textColor;
 	Color backgroundColor;
+	bool show;
 };

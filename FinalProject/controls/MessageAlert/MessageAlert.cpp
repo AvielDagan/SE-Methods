@@ -13,7 +13,7 @@ MessageAlert::MessageAlert(short left, short top, short width,BorderDrawer* butt
         Panel::addControl(&this->okBtn);
         Panel::addControl(&this->cancel);
         returnValue = "";
-        // show = false;
+        show = true;
     }
     
 
@@ -33,24 +33,37 @@ void MessageAlert::setShowButton(Button *button) {
 void MessageAlert::draw(Graphics& g, int x, int y, size_t z) {
     int relativeX, relativeY;
     // cout << "                                                                                                                                                                                   @!@!" << endl;
-    if(z == 0) {
+    if(z == 0 && this->show == true) {
         Panel::draw(g, x , y, z);
         relativeX = message.getLeft();
         relativeY = message.getTop();
         // cout << "                                                                                                                                                                                   @!@!" << endl;
-        message.draw(g, x + relativeX + 1, y + relativeY + 1, z);
+        if(message.getShow()) 
+            message.draw(g, x + relativeX + 1, y + relativeY + 1, z);
         relativeX = okBtn.getLeft();
         relativeY = okBtn.getTop();
-        okBtn.draw(g, x + relativeX + 1, y + relativeY + 1, z);
+        if(okBtn.getShow())
+            okBtn.draw(g, x + relativeX + 1, y + relativeY + 1, z);
         relativeX = cancel.getLeft();
         relativeY = cancel.getTop();
-        cancel.draw(g, x + relativeX + 1, y + relativeY + 1, z);
+        if(cancel.getShow())
+            cancel.draw(g, x + relativeX + 1, y + relativeY + 1, z);
     }
 }
 
 
 void MessageAlert::notify(string text) {
     if(text == "OK") {
-        cout << "                                                                                               !@##!!@#" << endl;
+        cancel.setShow(false);
+        cancel.setCanClick(false);
+    }
+
+    if(text == "CANCEL"){
+        this->setShow(false);
+        cancel.setShow(false);
+        cancel.setCanClick(false);
+        okBtn.setShow(false);
+        okBtn.setCanClick(false);
+        message.setShow(false);
     }
 } 
