@@ -2,7 +2,7 @@
 #include "./CheckBox.hpp"
 
 CheckBox::CheckBox(short left, short top, short width,BorderDrawer* buttonBorder, Color textColor, Color backgroundColor, string value):
-    Button(left, top, width,5, buttonBorder, textColor, backgroundColor, value)
+    Button(left, top, width, buttonBorder, textColor, backgroundColor, value)
 {
     selected = false;
     selectedString = "";

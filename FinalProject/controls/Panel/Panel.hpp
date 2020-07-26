@@ -1,30 +1,27 @@
 #pragma once
-
-#include <vector>
-#include <windows.h>
+#include "vector"
 #include "../../Common/Control/Control.hpp"
+#include "../BorderDrawer/BorderDrawer.hpp"
 
 using namespace std;
 
-class Panel : public Control
-{
-public:
-    Panel(short left, short top, BorderDrawer *border, Color textColor, Color BgColor, size_t layer);
-    ~Panel();
-    void addControl(Control *control);
-    Control *getControls(int i);
-    int getFocusIndex();
+class Panel : public Control {
+    public:
+        Panel(short left, short top, BorderDrawer* border, Color textColor, Color backgroundColor);
+        ~Panel();
 
-    virtual void draw(Graphics &g, short left, short top, size_t z);
-    virtual void keyDown(int keyCode, char charecter);
-    virtual void getAllControls(vector<Control *> *controls);
-    // COORD getControlLocation();
-    void setControlLocation(COORD);
-    // notify();
+        bool addControl(Control* control);
+        Control* getControl(int index);
+        int getFocusIndex();
 
-private:
-    vector<Control *> controls;
-    vector<Control *> controllersLocation;
-    void panelSize();
-    int focusIndex;
+        virtual void draw(Graphics& g, int x, int y, size_t z);
+		virtual void mousePressed(int x, int y, bool isLeft);
+		virtual void keyDown(int keyCode, char charecter);
+		virtual void getAllControls(vector<Control*>* controls);
+
+    private:
+        vector<Control*> controls;
+        int focusIndex;
+
+        void calculateWidthAndHeight();
 };
