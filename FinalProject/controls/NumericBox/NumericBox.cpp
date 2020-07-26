@@ -88,7 +88,25 @@ int NumericBox::setMax(int max)
 bool NumericBox::setValue(int)
 {
     return true;
-} //return
+} 
+
+void NumericBox::keyDown(int keyCode, char charecter){
+    switch (keyCode)
+    {
+    case VK_LEFT:
+        //setFocus
+        break;
+    case VK_RIGHT:
+        //setFocus
+        break;
+    case VK_RETURN:
+        //press on + or  -
+        increase();
+        break;
+    default:
+        break;
+    }
+}
 
 void NumericBox::draw(Graphics &g, int x, int y, size_t z)
 {

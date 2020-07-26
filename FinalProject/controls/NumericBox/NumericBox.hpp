@@ -25,6 +25,7 @@ public:
     int getMax();
     int setMax(int);
     bool setValue(int);
+    void keyDown(int keyCode, char charecter);
     void draw(Graphics& g, int x, int y, size_t z);
 
     NumericBox(short left, short top, int maxVal, int minVal, BorderDrawer* border, Color textColor, Color backgroundColor);

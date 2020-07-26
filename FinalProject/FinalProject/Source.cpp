@@ -22,7 +22,7 @@ int main(int argc, char const *argv[])
     Panel panel(0, 0, dbd, Color::White, Color::Black, 0);
     // Label l(0, 15, 10, dbd, Color::Cyan, Color::Black, "test label");
     Button b(0, 0, 5, 5, dbd, Color::Cyan, Color::Black, "test Button");
-    MessageAlert ma(0,0,15,sbd,dbd,Color::Cyan, Color::Black,"message","OK","CANCEL",&b);
+    MessageAlert ma(5,5,15,sbd,dbd,Color::Cyan, Color::Black,"message","OK","CANCEL",&b);
     NumericBox nb(0,0,0,100,dbd, Color::White, Color::Black);
     panel.addControl(&b);
     panel.addControl(&ma); 
