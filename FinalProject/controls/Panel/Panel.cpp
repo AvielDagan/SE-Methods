@@ -1,7 +1,7 @@
 #include "./Panel.h"
 
 Panel::Panel(short left, short top, BorderDrawer* border, Color textColor, Color backgroundColor) :
-    Control(left, top, 1, 1, border, textColor, backgroundColor) {
+    Control(left, top, 15, 15, border, textColor, backgroundColor) {
         calculateWidthAndHeight();
 }
 
@@ -111,6 +111,6 @@ void Panel::calculateWidthAndHeight() {
             calcHeight = ciTop + ciHeight;
         }
     }
-    setWidth(calcWidth + 2);
-    setHeight(calcHeight + 2);
+    setWidth(calcWidth + 5);
+    setHeight(calcHeight + 5);
 }

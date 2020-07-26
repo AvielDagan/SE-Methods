@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "../Label/Label.h"
+#include <vector>
 
 class Button : public Label
 {
@@ -10,4 +11,7 @@ public:
     // ~Button();
     void keyDown(int keyCode, char character);
     bool canGetFocus(){ return true; }
+
+private:
+
 };

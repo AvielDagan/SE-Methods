@@ -24,6 +24,6 @@ public:
     void setShowButton(Button *button);
 
     virtual void draw(Graphics &g, int x, int y, size_t z);
-    MessageAlert(short left, short top, short width,BorderDrawer* buttonBorder, BorderDrawer* border, Color textColor, Color backgroundColor, string message, string ok, string cancel, Button* showButton);
+    MessageAlert(short left, short top, short width, BorderDrawer *buttonBorder, BorderDrawer *border, Color textColor, Color backgroundColor, string message, string ok, string cancel, Button *showButton);
     ~MessageAlert() {}
 };

@@ -27,9 +27,10 @@ int main(int argc, char const *argv[])
     TextBox TB(30, 0, 10, sbd, Color::White, Color::Cyan); // ?
     TextBox TB2(5, 0, 10, sbd, Color::White, Color::Cyan); // ?
     // std::cout << "printing" << std::endl;
-    // MessageAlert ma(0,0,15,sbd,dbd,Color::Cyan, Color::Black,"message","OK","CANCEL",&b);
+    MessageAlert ma(0,0,20,sbd,dbd,Color::Cyan, Color::Black,"message","OK","CANCEL",&b);
     // panel.addControl(&c);
-    panel.addControl(&b);
+    // panel.addControl(&b);
+    panel.addControl(&ma);
     panel.addControl(&TB);
     panel.addControl(&TB2);
     // panel.addControl(&l);

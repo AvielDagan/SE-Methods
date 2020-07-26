@@ -1,6 +1,8 @@
 #include "./Control.h"
 #include "../../Controls/NullBorderDrawer/NullBorderDrawer.hpp"
 // #include "../Controls/MessageBox.h"
+#include <iostream>
+using namespace std;
 
 Control* Control::focusedControl = nullptr;
 bool Control::messageBoxLock = false;
@@ -36,5 +38,6 @@ void Control::draw(Graphics& g, int x, int y, size_t z) {
     g.setForeground(getTextColor());
     g.setBackground(getBackgroundColor());
     g.setCursorVisibility(false);
+
     border->drawBorder(g,  x, y, width + borderPadding, height + borderPadding);
 }
