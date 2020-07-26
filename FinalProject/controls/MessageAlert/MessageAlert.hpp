@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Panel/Panel.hpp"
-#include "../Label/Label.hpp"
+#include "../Panel/Panel.h"
+#include "../Label/Label.h"
 #include "../Button/Button.hpp"
 // #include "../../Common/Control/Control.hpp"
 #include "../SingleBorderDrawer/SingleBorderDrawer.hpp"

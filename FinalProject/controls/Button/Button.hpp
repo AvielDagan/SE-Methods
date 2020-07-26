@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include "../Label/Label.hpp"
+#include "../Label/Label.h"
 
 class Button : public Label
 {
