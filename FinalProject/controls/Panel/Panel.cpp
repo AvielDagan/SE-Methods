@@ -1,71 +1,43 @@
-#include "./Panel.hpp"
-#include <iostream>
+#include "./Panel.h"
 
-Panel::Panel(short left, short top, BorderDrawer *border, Color textColor, Color BgColor, size_t layer)
-    : Control(left, top, 1, 1, border, textColor, BgColor)
-{
-    panelSize();
-}
-Panel::~Panel()
-{
-}
-Control *Panel::getControls(int i)
-{
-    return controls[i];
-}
-void Panel::addControl(Control *control)
-{
-    controls.push_back(control);
-}
-COORD Panel::getControlLocation()
-{
-}
-void Panel::setControlLocation(COORD)
-{
+Panel::Panel(short left, short top, BorderDrawer* border, Color textColor, Color backgroundColor) :
+    Control(left, top, 15, 15, border, textColor, backgroundColor) {
+        calculateWidthAndHeight();
 }
 
-void Panel::draw(Graphics &g, short left, short top, size_t z)
-{
-    short controlLeft;
-    short controlTop;
-    panelSize();
-    if (z == 0)
-    {
-        Control::draw(g, left, top, z);
-        for (int i = 0; i < controls.size(); ++i)
-        {
-            controlLeft = controls[i]->getLeft();
-            controlTop = controls[i]->getTop();
-            g.setForeground(controls[i]->getTextColor());
-            g.setBackground(controls[i]->getBgColor());
-            controls[i]->draw(g, left + controlLeft + 1, top + controlTop + 1, z);
+Panel::~Panel() {}
+
+bool Panel::addControl(Control* control) {
+    if(control != nullptr) {
+        try {
+            controls.push_back(control);
+            if(getFocus() == nullptr && control->canGetFocus()) {
+                setFocus(*control);
+            }
         }
-    }
-    if (z == 1)
-    {
-        if (getFocusIndex() != -1)
-        {
-            controlLeft = controls[focusIndex]->getLeft();
-            controlTop = controls[focusIndex]->getTop();
-            g.setForeground(controls[focusIndex]->getTextColor());
-            g.setBackground(controls[focusIndex]->getBgColor());
-            controls[focusIndex]->draw(g, left + controlLeft, top + controlTop, 0);
+        catch(...) {
+            return false;
         }
+        return true;
     }
+    return false;
 }
 
-int Panel::getFocusIndex()
-{
-    Control *tempPtr = getFocus();
-    for (int i = 0; i < controls.size(); ++i)
-    {
-        if (controls[i] == tempPtr)
-        {
+Control* Panel::getControl(int index) {
+    if(controls.size() < index || index < 0) {
+        return nullptr;
+    }
+    return controls[index];
+}
+
+int Panel::getFocusIndex() {
+    Control* tempPtr = getFocus();
+    for(int i = 0; i < controls.size(); ++i) {
+        if(controls[i] == tempPtr) {
             focusIndex = i;
             return i;
         }
-        else if (controls[i]->getFocusIndex() != -1)
-        {
+        else if(controls[i]->getFocusIndex() != -1) {
             focusIndex = i;
             return i;
         }
@@ -74,45 +46,76 @@ int Panel::getFocusIndex()
     return -1;
 }
 
-void Panel::getAllControls(vector<Control *> *controls)
-{
-    for (int i = 0; i < this->controls.size(); ++i)
-    {
-        controls->push_back(this->controls[i]);
-        this->controls[i]->getAllControls(controls);
+void Panel::draw(Graphics& g, int x, int y, size_t z) {
+    int relativeX, relativeY;
+    calculateWidthAndHeight();
+    if(z == 0 && this->getShow()) {
+        Control::draw(g, x, y, z);
+        for(int i = 0; i < controls.size(); ++i) {
+            relativeX = controls[i]->getLeft();
+            relativeY = controls[i]->getTop();
+            g.setForeground(controls[i]->getTextColor());
+            g.setBackground(controls[i]->getBackgroundColor());
+            controls[i]->draw(g, x + relativeX + 1, y + relativeY + 1, z);
+            // cout << "                                                                                                                                   #@!#@!#@!#@" << endl;
+        }
+    }
+    if(z == 1 && this->getShow()) {
+        if(getFocusIndex() != -1) {
+            relativeX = controls[focusIndex]->getLeft();
+            relativeY = controls[focusIndex]->getTop();
+            g.setForeground(controls[focusIndex]->getTextColor());
+            g.setBackground(controls[focusIndex]->getBackgroundColor());
+            controls[focusIndex]->draw(g, x + relativeX + 1, y + relativeY + 1, 0);
+        }
     }
 }
-void Panel::keyDown(int keyCode, char charecter)
-{
-    if (getFocusIndex() != -1)
-    {
+
+void Panel::mousePressed(int x, int y, bool isLeft) {
+    int l = getLeft(), t = getTop(), w = getWidth(), h = getHeight();
+    if(x >= l && x <= l + w && y >= t && y <= t + h && isLeft) {
+        if(getMessageBoxLock() == false) {
+            for(int i = 0; i < controls.size(); ++i) {
+                controls[i]->mousePressed(x - l - 1, y - t - 1, isLeft);
+            }
+        }
+        else if(getFocusIndex() != -1) {
+            controls[focusIndex]->mousePressed(x - l - 1, y - t - 1, isLeft);
+        }
+    }
+}
+
+void Panel::keyDown(int keyCode, char charecter) {
+    if(getFocusIndex() != -1) {
         controls[focusIndex]->keyDown(keyCode, charecter);
     }
 }
 
-void Panel::panelSize()
-{
-    short sWidth = 0, sHeight = 0, tLeft = 0, tTop = 0, tWidth = 0, tHeight = 0;
-    for (int i = 0; i < controls.size(); ++i)
-    {
-        tLeft = controls[i]->getLeft();
-        tTop = controls[i]->getTop();
-        tWidth = controls[i]->getWidth();
-        tHeight = controls[i]->getHeight();
+void Panel::getAllControls(vector<Control*>* controls) {
+    for(int i = 0; i < this->controls.size(); ++i) {
+        controls->push_back(this->controls[i]);
+        this->controls[i]->getAllControls(controls);
+    }
+}
 
-        // calc max size
-        if (tTop + tHeight > sHeight)
-        {
-            // std::cout << "inside sHeight" << std::endl;
-            sHeight = tTop + tHeight;
+void Panel::calculateWidthAndHeight() {
+    short calcWidth = 0, calcHeight = 0, ciLeft, ciTop, ciWidth, ciHeight;
+    for(int i = 0; i < controls.size(); ++i) {
+        ciLeft = controls[i]->getLeft();
+        ciTop = controls[i]->getTop();
+        ciWidth = controls[i]->getWidth();
+        ciHeight = controls[i]->getHeight();
+        if(ciLeft + ciWidth > calcWidth) {
+            calcWidth = ciLeft + ciWidth;
         }
-        if (tLeft + tWidth > sWidth)
-        {
-            sWidth = tLeft + tWidth;
+        if(ciTop + ciHeight > calcHeight) {
+            calcHeight = ciTop + ciHeight;
         }
     }
-
-    setWidth(sWidth + 4);
-    setHeight(sHeight + 4);
+    setWidth(calcWidth + 5);
+    setHeight(calcHeight + 5);
 }
-// notify();
+
+void Panel::cleanVec() {
+    controls.clear();
+}

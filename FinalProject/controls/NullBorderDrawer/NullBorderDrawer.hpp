@@ -1,7 +1,7 @@
-#include "../BorderDrawer/BorderDrawer.hpp";
+#include "../BorderDrawer/BorderDrawer.hpp"
 
 class NullBorderDrawer : public BorderDrawer {
     public:
-        NullBorderDrawer() : BorderDrawer(0x20, 0x20, 0x20, 0x20, 0x20, 0x20) {} ;
+        NullBorderDrawer();
         virtual ~NullBorderDrawer();
 };
