@@ -7,7 +7,7 @@ using namespace std;
 Control *Control::focusedControl = nullptr;
 bool Control::messageBoxLock = false;
 
-Control::Control(short left, short top, short width, short height, BorderDrawer *border, Color textColor, Color backgroundColor) : left(left), top(top), width(width), height(height), border(border), textColor(textColor), backgroundColor(backgroundColor) {}
+Control::Control(short left, short top, short width, short height, BorderDrawer *border, Color textColor, Color backgroundColor) : left(left), top(top), width(width), height(height), border(border), textColor(textColor), backgroundColor(backgroundColor), show(true) {}
 
 Control::~Control()
 {
@@ -39,22 +39,26 @@ void Control::setBorder(BorderDrawer *border)
 
 void Control::draw(Graphics &g, int x, int y, size_t z)
 {
-    int borderPadding = 2;
-    if (getFocus() == this)
+    if (this->show == true)
     {
-        borderPadding = 3;
-        // g.setForeground(Color::White);
-        // g.setBackground(Color::Black);
-    }
-    // else
-    // {
+
+        int borderPadding = 2;
+        if (getFocus() == this)
+        {
+            borderPadding = 3;
+            // g.setForeground(Color::White);
+            // g.setBackground(Color::Black);
+        }
+        // else
+        // {
 
         g.setForeground(getTextColor());
         g.setBackground(getBackgroundColor());
-    // }
-    g.setCursorVisibility(false);
+        // }
+        g.setCursorVisibility(false);
 
-    border->drawBorder(g, x, y, width + borderPadding, height + borderPadding);
+        border->drawBorder(g, x, y, width + borderPadding, height + borderPadding);
+    }
 }
 
 void Control::drawFocus(Graphics &g, int x, int y, size_t z)
@@ -65,4 +69,8 @@ void Control::drawFocus(Graphics &g, int x, int y, size_t z)
     g.setCursorVisibility(false);
 
     border->drawBorder(g, x, y, width + borderPadding, height + borderPadding);
+}
+
+void Control::setShow(bool f) {
+    this->show = f;
 }
