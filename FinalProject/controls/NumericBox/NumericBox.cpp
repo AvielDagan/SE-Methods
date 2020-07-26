@@ -16,7 +16,6 @@ NumericBox::NumericBox(short left, short top, int maxVal, int minVal, BorderDraw
 NumericBox::~NumericBox()
 {
 }
-
 void NumericBox::increase()
 {
     stringstream str(title.getTitle());

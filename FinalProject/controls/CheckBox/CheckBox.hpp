@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Label/Label.hpp"
+#include "../Label/Label.h"
 #include "../Button/Button.hpp"
 
 class CheckBox : public Button
