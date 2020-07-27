@@ -23,13 +23,18 @@ int main(int argc, char const *argv[])
     Panel panel(0, 0, dbd, Color::White, Color::Black);
     // Label l(0, 15, 10, dbd, Color::Cyan, Color::Black, "test label");
     // Label ll(10, 10, 10, 10, dbd, Color::Cyan, Color::Black, "test label");
-    Button b(5, 5, 10, dbd, Color::Cyan, Color::Black, "test Button",NULL);
-    Button c(10, 10, 10, dbd, Color::Cyan, Color::Black, "test Button2",NULL);
+    Button b(5, 5, 10, dbd, Color::Cyan, Color::Black, "test Button", NULL);
+    Button c(10, 10, 10, dbd, Color::Cyan, Color::Black, "test Button2", NULL);
     TextBox TB(30, 0, 10, sbd, Color::White, Color::Cyan); // ?
     TextBox TB2(5, 0, 10, sbd, Color::White, Color::Cyan); // ?
     // std::cout << "printing" << std::endl;
-    MessageAlert ma(0,0,20,sbd,dbd,Color::Cyan, Color::Black,"message","OK","CANCEL",&b);
-    // NumericBox nb(0,0,100,0,dbd,Color::Cyan, Color::Black);
+    MessageAlert ma(0, 0, 20, sbd, dbd, Color::Cyan, Color::Black, "message", "OK", "CANCEL", &b);
+    NumericBox nb(0, 0, 100, 0, dbd, Color::Cyan, Color::Black);
+    CheckList cl(60, 10, 20, dbd, Color::Orange, Color::White);
+    cl.addToList("avielllll");
+    cl.addToList("itayyyyyy");
+    cl.addToList("tomerrrrrr");
+    cl.addToList("talllllllll");
     // panel.addControl(&c);
     // panel.addControl(&b);
     panel.addControl(&ma);
@@ -37,7 +42,8 @@ int main(int argc, char const *argv[])
     panel.addControl(&TB2);
     // panel.addControl(&l);
     // panel.addControl(&ma);
-    // panel.addControl(&nb);
+    panel.addControl(&nb);
+    panel.addControl(&cl);
     // panel.addControl(&ll);
 
     // cout << "panel.getWidth() -> " << panel.getWidth() << endl;

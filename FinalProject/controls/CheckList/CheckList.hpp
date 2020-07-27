@@ -1,23 +1,28 @@
 #pragma once
-
 #include <vector>
-#include "../Panel/Panel.hpp"
-#include "../Label/Label.hpp"
 #include "../CheckBox/CheckBox.hpp"
+#include "../../controls/Panel/Panel.hpp"
 
-using namespace std;
+class CheckList : public Control {
+    public:
+        CheckList(short left, short top, short width, BorderDrawer* border, Color textColor, Color backgroundColor);
+        ~CheckList();
 
-class CheckList : public Panel
-{
-private:
-    vector<CheckBox> selectedItems;
-public:
-    bool addItemToList(CheckBox& cb);
-    bool removeItemFromList(CheckBox& cb);
-    bool addSelectedItem(CheckBox& cb);
-    bool removeSelectedItem(CheckBox& cb);
-    vector<CheckBox> getSelectedCheckBoxes();
-    CheckList(short left,short top,short width, short height, BorderDrawer* border, Color textColor, Color BgColor, size_t layer);
-    ~CheckList();
+        virtual void addToList(string item);
+        bool addSelectedItem(string item);
+        bool removeSelectedItem(string item);
+        void getSelectedItems(vector<string>& selected);
+        void invertColors(CheckBox* item);
+
+        virtual void draw(Graphics& g, int x, int y, size_t z);
+		virtual void keyDown(int keyCode, char charecter);
+		virtual void getAllControls(vector<Control*>* controls);
+		virtual bool canGetFocus() { return true; };
+		virtual int getFocusIndex();
+        virtual void update(int x, int y, string s);
+
+    protected:
+        vector<CheckBox*> items;
+        vector<string> selectedItems;
+        int focusIndex;
 };
-
