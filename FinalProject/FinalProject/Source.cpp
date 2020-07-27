@@ -9,7 +9,8 @@
 #include "../controls/Panel/Panel.hpp"
 #include "../controls/MessageAlert/MessageAlert.hpp"
 #include "../controls/DoubleBorderDrawer/DoubleBorderDrawer.hpp"
-#include "../Controls/TextBox/textbox.hpp"
+#include "../controls/TextBox/Textbox.hpp"
+#include "../controls/NumericBox/NumericBox.hpp"
 #include <iostream>
 using namespace std;
 
@@ -23,17 +24,19 @@ int main(int argc, char const *argv[])
     // Label l(0, 15, 10, dbd, Color::Cyan, Color::Black, "test label");
     // Label ll(10, 10, 10, 10, dbd, Color::Cyan, Color::Black, "test label");
     Button b(5, 5, 10, dbd, Color::Cyan, Color::Black, "test Button");
-    Button c(10, 10, 10, dbd, Color::Cyan, Color::Black, "test Button2");
-    TextBox TB(30, 0, 10, sbd, Color::White, Color::Cyan); // ?
-    TextBox TB2(5, 0, 10, sbd, Color::White, Color::Cyan); // ?
+    // Button c(10, 10, 10, dbd, Color::Cyan, Color::Black, "test Button2");
+    // TextBox TB(30, 0, 10, sbd, Color::White, Color::Cyan); // ?
+    // TextBox TB2(5, 0, 10, sbd, Color::White, Color::Cyan); // ?
     // std::cout << "printing" << std::endl;
-    // MessageAlert ma(0,0,15,sbd,dbd,Color::Cyan, Color::Black,"message","OK","CANCEL",&b);
+    MessageAlert ma(0,0,30,sbd,dbd,Color::Cyan, Color::Black,"message","OK","CANCEL",&b);
+    NumericBox nb(0,0,100,0,dbd,Color::Cyan, Color::Black);
     // panel.addControl(&c);
-    panel.addControl(&b);
-    panel.addControl(&TB);
-    panel.addControl(&TB2);
+    // panel.addControl(&b);
+    // panel.addControl(&TB);
+    // panel.addControl(&TB2);
     // panel.addControl(&l);
     // panel.addControl(&ma);
+    panel.addControl(&nb);
     // panel.addControl(&ll);
 
     // cout << "panel.getWidth() -> " << panel.getWidth() << endl;

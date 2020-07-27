@@ -1,16 +1,19 @@
 #include "./NumericBox.hpp"
 
 NumericBox::NumericBox(short left, short top, int maxVal, int minVal, BorderDrawer *border, Color textColor, Color backgroundColor) : 
-    Panel(left, top, border, textColor, backgroundColor, 0),
+    Panel(left, top, border, textColor, backgroundColor),
     title(Label(left + 7, top + 2, 1, border, textColor, backgroundColor, " 0")),
-    add(Button(left + 12, top + 2, 1, 1, border, textColor, backgroundColor, " + ")),
-    subtract(Button(left + 2, top + 2, 1, 1, border, textColor, backgroundColor, " - ")),
+    add(Button(left + 12, top + 2, 1, border, textColor, backgroundColor, " + ")),
+    subtract(Button(left + 2, top + 2, 1, border, textColor, backgroundColor, " - ")),
     maxVal(maxVal),
     minVal(minVal)
 {
     Panel::addControl(&this->add);
     Panel::addControl(&this->subtract);
     Panel::addControl(&this->title);
+    auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    currentCoord = {left + 1 , top + 1};
+    SetConsoleCursorPosition(handle, currentCoord);
 }
 
 NumericBox::~NumericBox()
@@ -18,33 +21,33 @@ NumericBox::~NumericBox()
 }
 void NumericBox::increase()
 {
-    stringstream str(title.getTitle());
+    stringstream str(title.getValue());
     int numericVal;
     str >> numericVal;// convert string to int
-    // int numericVal = atoi(title.getTitle().c_str());
+    // int numericVal = atoi(title.getValue().c_str());
     if (numericVal >= maxVal)
         return;
 
     ++numericVal;
     str << numericVal; // return new int to stringstream str
-    title.setTitle(str.str()); //setTitle with new string
+    title.setValue(str.str()); //setValue with new string
 }
 void NumericBox::decrease()
 {
-    stringstream str(title.getTitle());
+    stringstream str(title.getValue());
     int numericVal;
     str >> numericVal;// convert string to int
-    // int numericVal = atoi(title.getTitle().c_str());
+    // int numericVal = atoi(title.getValue().c_str());
     if (numericVal <= minVal)
         return;
     --numericVal;
     str << numericVal; // return new int to stringstream str
-    title.setTitle(str.str()); //setTitle with new string
+    title.setValue(str.str()); //setValue with new string
 }
 
 int NumericBox::getVal()
 {
-    return atoi(title.getTitle().c_str());
+    return atoi(title.getValue().c_str());
 }
 
 void NumericBox::setVal(int val)
@@ -57,7 +60,7 @@ void NumericBox::setVal(int val)
     }
     stringstream str("");
     str << val;
-    title.setTitle(str.str());
+    title.setValue(str.str());
 }
 
 int NumericBox::getMin()
@@ -90,20 +93,26 @@ bool NumericBox::setValue(int)
 } 
 
 void NumericBox::keyDown(int keyCode, char charecter){
-    switch (keyCode)
-    {
-    case VK_LEFT:
-        //setFocus
-        break;
-    case VK_RIGHT:
-        //setFocus
-        break;
-    case VK_RETURN:
-        //press on + or  -
+    int textWidth = title.getValue().length();
+    auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    if(keyCode == VK_LEFT || keyCode == VK_RIGHT){
+        auto offset = currentCoord.X - this->left;
+        if(offset - 1 > 0 && keyCode == VK_LEFT){
+            currentCoord = { currentCoord.X - 1, currentCoord.Y };
+            SetConsoleCursorPosition(handle, currentCoord);
+            return;
+        }
+
+        if(offset - 1 < textWidth && keyCode == VK_RIGHT){
+            currentCoord = { currentCoord.X + 1, currentCoord.Y };
+            SetConsoleCursorPosition(handle, currentCoord);
+            return;
+        }
+    }
+    if(keyCode == VK_RETURN){
+        //get focus - should be on "-" or "+"
         increase();
-        break;
-    default:
-        break;
     }
 }
 

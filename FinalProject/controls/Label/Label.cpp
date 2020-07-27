@@ -1,4 +1,4 @@
-#include "Label.h"
+#include "Label.hpp"
 #include <iostream>
 
 Label::Label(short left, short top, short width, BorderDrawer* border, Color textColor, Color backgroundColor, string value) :

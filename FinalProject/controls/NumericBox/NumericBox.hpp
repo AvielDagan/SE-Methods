@@ -14,7 +14,7 @@ private:
     Button subtract;
     Button add;
     Label title;
-
+    COORD currentCoord;
 public:
     void increase();
     void decrease();
