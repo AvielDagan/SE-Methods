@@ -2,17 +2,18 @@
 
 #include <vector>
 #include "../Observer/Observer.hpp"
+#include <string>
 #include <memory>
 
 using namespace std;
 
 class Subject{
     private:
-        vector<shared_ptr<Observer>> observers;
+        vector<Observer*> observers;
     public:
-        void addObserver(shared_ptr<Observer>);
-        void actions(int keyCode);
-        void listenKeyStroke();//while(1)
+        void addObserver(Observer* observe);
+        void actions(string text);
+        void listenKeyStroke();
         Subject();
         virtual ~Subject() = 0;
         
