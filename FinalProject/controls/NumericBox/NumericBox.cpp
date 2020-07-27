@@ -3,8 +3,8 @@
 NumericBox::NumericBox(short left, short top, int maxVal, int minVal, BorderDrawer *border, Color textColor, Color backgroundColor) : 
     Panel(left, top, border, textColor, backgroundColor),
     title(Label(left + 7, top + 2, 1, border, textColor, backgroundColor, " 0")),
-    add(Button(left + 12, top + 2, 1, border, textColor, backgroundColor, " + ")),
-    subtract(Button(left + 2, top + 2, 1, border, textColor, backgroundColor, " - ")),
+    add(Button(left + 12, top + 2, 1, border, textColor, backgroundColor, " + ",NULL)),
+    subtract(Button(left + 2, top + 2, 1, border, textColor, backgroundColor, " - ",NULL)),
     maxVal(maxVal),
     minVal(minVal)
 {
