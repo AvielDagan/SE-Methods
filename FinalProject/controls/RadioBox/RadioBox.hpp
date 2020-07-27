@@ -1,14 +1,16 @@
 #pragma once
 
-// #include "CheckList.hpp"
-// #include "CheckBox.hpp"
+#include "../CheckList/CheckList.hpp"
 
-class RadioBox/*:public CheckList*/
+
+class RadioBox : public CheckList
 {
 private:
+
     
 public:
     // bool addSelectedItem(CheckBox cb);
-    RadioBox();
-    ~RadioBox();
+    RadioBox(short left, short top, short width, BorderDrawer *border, Color textColor, Color backgroundColor,string labelText);
+    // ~RadioBox();
+    virtual void keyDown(int keyCode, char charecter);
 };

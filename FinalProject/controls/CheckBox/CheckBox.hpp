@@ -1,27 +1,23 @@
 #pragma once
-
-#include "../Label/Label.hpp"
+#include <iostream>
 #include "../Button/Button.hpp"
+#include <string>
+// #include "../SingleBorderDrawer/SingleBorderDrawer.hpp"
+
+
+using namespace std;
 
 class CheckBox : public Button
 {
-private:
-    string selectedString;
-    string unselectedString;
-    bool selected;
-
 public:
-    string getSelectedString() {return selectedString;}
-    void setSelectedString(string str) { selectedString = str; };
-    void setUnselectedString(string str) { unselectedString = str; };
-    bool getSelected() { return selected; };
-    void setSelected(bool selected) { this->selected = selected; };
+    CheckBox(short left, short top, short width, BorderDrawer *border, Color textColor, Color BgColor, string title, Observer *observ);
+    // ~CheckBox(){};
 
-    virtual void draw(Graphics& g, int x, int y, size_t z);
-    virtual void keyDown(int keyCode, char charecter);
-    virtual bool canGetFocus() { return true; };
-    CheckBox(short left, short top, short width,BorderDrawer* buttonBorder, Color textColor, Color backgroundColor, string value);
-    ~CheckBox();
+    void selectBox();
+    void draw(Graphics &g, int x, int y, size_t z);
+    bool getIsSelected() {return isSelected;};
+
+private:
+    bool isSelected;
+    string cbValue;
 };
-
-
