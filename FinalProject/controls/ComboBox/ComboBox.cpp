@@ -6,6 +6,7 @@ using namespace std;
 ComboBox::ComboBox(short left, short top, short width, BorderDrawer *border, Color textColor, Color backgroundColor) : Panel(left + 5, top + 5, border, textColor, backgroundColor),
                                                                                                                        // showButton(left + 15, top + 1, 1, new SingleBorderDrawer(), textColor, backgroundColor, " +",this),
                                                                                                                        text(left + 1, top + 1, 10, new SingleBorderDrawer(), textColor, backgroundColor, ""),
+                                                                                                                       message(left + 1, top + 1, 10, new SingleBorderDrawer(), textColor, backgroundColor, "ComboBox"),
                                                                                                                        curr(-1),
                                                                                                                        marginTop(top + 5),
                                                                                                                        optionsIsOpen(false)
@@ -72,6 +73,9 @@ void ComboBox::draw(Graphics &g, int x, int y, size_t z)
 {
     if (z == 0)
     {
+        if(Control::getFocus() == this) {
+            message.draw(g,x,y,z);
+        }
         if (this->getShow())
         {
             for (auto &value : Panel::controls)
@@ -109,6 +113,8 @@ void ComboBox::keyDown(int keyCode, char character)
     }
     if (keyCode == VK_SPACE)
     {
+        if(curr == -1)
+            ++curr;
         temp = dynamic_cast<Button *>(Panel::controls[curr]);
         this->text.setValue(temp->getValue());
         this->optionsIsOpen = !this->optionsIsOpen;

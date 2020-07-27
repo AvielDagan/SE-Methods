@@ -12,6 +12,7 @@ private:
     int curr;
     bool optionsIsOpen;
     short marginTop;
+    Label message;
 
 public:
     ComboBox(short left, short top, short width, BorderDrawer *border, Color textColor, Color backgroundColor);

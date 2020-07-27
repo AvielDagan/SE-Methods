@@ -1,33 +1,29 @@
+#include "CheckBox.hpp"
+#include "../NullBorderDrawer/NullBorderDrawer.hpp"
+// #include "../SingleBorderDrawer/SingleBorderDrawer.hpp"
 
-#include "./CheckBox.hpp"
-
-CheckBox::CheckBox(short left, short top, short width,BorderDrawer* buttonBorder, Color textColor, Color backgroundColor, string value):
-    Button(left, top, width, buttonBorder, textColor, backgroundColor, value,NULL)
-{
-    selected = false;
-    selectedString = "";
-    unselectedString = "";
-}
-
-CheckBox::~CheckBox()
-{
-    delete this;
+CheckBox::CheckBox(short left, short top, short width, BorderDrawer *border, Color textColor, Color BgColor, string title,Observer* observ) :
+Button( left,top,  15, border, textColor, BgColor, title, observ)
+ {
+    isSelected = false;
+    cbValue = title;
 }
 
 
-void CheckBox::draw(Graphics& g, int x, int y, size_t z) {
-    if(z == 0) {
-        Button::draw(g, x, y, z);
-        if(selected == true) {
-            g.write(x + 1, y + 1, selectedString);
-        }
-        else {
-            g.write(x + 1, y + 1, unselectedString);
-        }
-        // g.write(x + 5, y + 1, getValue());
+void CheckBox::selectBox() {
+    isSelected = !isSelected;
+}
+
+void CheckBox::draw(Graphics &g, int x, int y, size_t z){
+    string selected = "[X] ";
+    string notSelected = "[ ] ";
+    if(isSelected) {
+        
+        setValue(selected + cbValue);
+    } 
+    else{ 
+        setValue(notSelected + cbValue);
     }
-}
-
-void CheckBox::keyDown(int keyCode, char charecter) {
-    // dynamic_cast<Control*>(listeners[0])->keyDown(keyCode, charecter);
+    Label::draw(g,left,top,z);
+    // title.draw(g,left + 5,top,z);
 }
