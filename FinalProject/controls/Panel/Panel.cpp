@@ -1,7 +1,7 @@
 #include "./Panel.hpp"
 
 Panel::Panel(short left, short top, BorderDrawer* border, Color textColor, Color backgroundColor) :
-    Control(left, top, 1, 1, border, textColor, backgroundColor) {
+    Control(left, top, 15, 15, border, textColor, backgroundColor) {
         calculateWidthAndHeight();
 }
 
@@ -49,7 +49,7 @@ int Panel::getFocusIndex() {
 void Panel::draw(Graphics& g, int x, int y, size_t z) {
     int relativeX, relativeY;
     calculateWidthAndHeight();
-    if(z == 0) {
+    if(z == 0 && this->getShow()) {
         Control::draw(g, x, y, z);
         for(int i = 0; i < controls.size(); ++i) {
             relativeX = controls[i]->getLeft();
@@ -57,9 +57,10 @@ void Panel::draw(Graphics& g, int x, int y, size_t z) {
             g.setForeground(controls[i]->getTextColor());
             g.setBackground(controls[i]->getBackgroundColor());
             controls[i]->draw(g, x + relativeX + 1, y + relativeY + 1, z);
+            // cout << "                                                                                                                                   #@!#@!#@!#@" << endl;
         }
     }
-    if(z == 1) {
+    if(z == 1 && this->getShow()) {
         if(getFocusIndex() != -1) {
             relativeX = controls[focusIndex]->getLeft();
             relativeY = controls[focusIndex]->getTop();
@@ -111,6 +112,10 @@ void Panel::calculateWidthAndHeight() {
             calcHeight = ciTop + ciHeight;
         }
     }
-    setWidth(calcWidth + 2);
-    setHeight(calcHeight + 2);
+    setWidth(calcWidth + 5);
+    setHeight(calcHeight + 5);
+}
+
+void Panel::cleanVec() {
+    controls.clear();
 }

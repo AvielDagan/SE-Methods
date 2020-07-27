@@ -76,7 +76,7 @@ void TextBox:: keyDown(int keyCode, char character){
 
 void TextBox::draw(Graphics& g, int x, int y, size_t z){
     Label::draw(g, x + 1, y + 1, z);
-    
     g.moveTo(currentCoord.X + 2, currentCoord.Y + 2);
     g.setCursorVisibility(true);
+    
 }

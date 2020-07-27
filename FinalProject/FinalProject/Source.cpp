@@ -23,17 +23,18 @@ int main(int argc, char const *argv[])
     Panel panel(0, 0, dbd, Color::White, Color::Black);
     // Label l(0, 15, 10, dbd, Color::Cyan, Color::Black, "test label");
     // Label ll(10, 10, 10, 10, dbd, Color::Cyan, Color::Black, "test label");
-    Button b(5, 5, 10, dbd, Color::Cyan, Color::Black, "test Button");
-    // Button c(10, 10, 10, dbd, Color::Cyan, Color::Black, "test Button2");
-    // TextBox TB(30, 0, 10, sbd, Color::White, Color::Cyan); // ?
-    // TextBox TB2(5, 0, 10, sbd, Color::White, Color::Cyan); // ?
+    Button b(5, 5, 10, dbd, Color::Cyan, Color::Black, "test Button",NULL);
+    Button c(10, 10, 10, dbd, Color::Cyan, Color::Black, "test Button2",NULL);
+    TextBox TB(30, 0, 10, sbd, Color::White, Color::Cyan); // ?
+    TextBox TB2(5, 0, 10, sbd, Color::White, Color::Cyan); // ?
     // std::cout << "printing" << std::endl;
-    MessageAlert ma(0,0,30,sbd,dbd,Color::Cyan, Color::Black,"message","OK","CANCEL",&b);
+    MessageAlert ma(0,0,20,sbd,dbd,Color::Cyan, Color::Black,"message","OK","CANCEL",&b);
     NumericBox nb(0,0,100,0,dbd,Color::Cyan, Color::Black);
     // panel.addControl(&c);
     // panel.addControl(&b);
-    // panel.addControl(&TB);
-    // panel.addControl(&TB2);
+    panel.addControl(&ma);
+    panel.addControl(&TB);
+    panel.addControl(&TB2);
     // panel.addControl(&l);
     // panel.addControl(&ma);
     panel.addControl(&nb);
