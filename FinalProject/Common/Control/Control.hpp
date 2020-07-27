@@ -16,7 +16,7 @@ public:
 
 	static Control *getFocus() { return focusedControl; };
 	static void setFocus(Control &control)
-	{
+	{	
 		if ((focusedControl != &control) && (control.canGetFocus() /*|| (typeid(control) == typeid(semMessageBox))*/))
 		{
 			focusedControl = &control;

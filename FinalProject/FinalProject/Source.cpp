@@ -27,6 +27,13 @@ int main(int argc, char const *argv[])
     Button c(10, 10, 10, dbd, Color::Cyan, Color::Black, "test Button2",NULL);
     TextBox TB(30, 0, 10, sbd, Color::White, Color::Cyan); // ?
     TextBox TB2(5, 0, 10, sbd, Color::White, Color::Cyan); // ?
+    ComboBox CB(40, 10,10, sbd, Color::White, Color::Blue);
+    Button plus(55, 11,1, dbd, Color::White, Color::Blue, " +",&CB);
+    
+	CB.addToList("Tal");
+	CB.addToList("Tomer");
+	CB.addToList("Aviel");
+    CB.addToList("Itay");
     // std::cout << "printing" << std::endl;
     MessageAlert ma(0,0,20,sbd,dbd,Color::Cyan, Color::Black,"message","OK","CANCEL",&b);
     // NumericBox nb(0,0,100,0,dbd,Color::Cyan, Color::Black);
@@ -35,6 +42,8 @@ int main(int argc, char const *argv[])
     panel.addControl(&ma);
     panel.addControl(&TB);
     panel.addControl(&TB2);
+    panel.addControl(&plus);
+    panel.addControl(&CB);
     // panel.addControl(&l);
     // panel.addControl(&ma);
     // panel.addControl(&nb);
