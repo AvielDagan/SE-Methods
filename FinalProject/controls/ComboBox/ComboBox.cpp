@@ -154,7 +154,7 @@ void ComboBox::keyDown(int keyCode, char character)
     //             }
     //             Control::setFocus(*items[focusIndex]);
     //             return;
-    //         }
+
 
     // Color tempColor;
     // if(show){
