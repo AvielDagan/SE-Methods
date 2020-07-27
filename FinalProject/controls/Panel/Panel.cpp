@@ -1,4 +1,4 @@
-#include "./Panel.h"
+#include "./Panel.hpp"
 
 Panel::Panel(short left, short top, BorderDrawer* border, Color textColor, Color backgroundColor) :
     Control(left, top, 15, 15, border, textColor, backgroundColor) {

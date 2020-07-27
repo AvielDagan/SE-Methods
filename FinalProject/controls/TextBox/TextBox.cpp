@@ -1,4 +1,4 @@
-#include "TextBox.h"
+#include "TextBox.hpp"
 
 
 TextBox::TextBox(short left, short top, short width, BorderDrawer* border, Color textColor, Color backgroundColor) : Label(left, top, width, border, textColor, backgroundColor, ""){
