@@ -6,7 +6,7 @@ using namespace std;
 ComboBox::ComboBox(short left, short top, short width, BorderDrawer *border, Color textColor, Color backgroundColor) : Panel(left + 5, top + 5, border, textColor, backgroundColor),
                                                                                                                        // showButton(left + 15, top + 1, 1, new SingleBorderDrawer(), textColor, backgroundColor, " +",this),
                                                                                                                        text(left + 1, top + 1, 10, new SingleBorderDrawer(), textColor, backgroundColor, ""),
-                                                                                                                       curr(0),
+                                                                                                                       curr(-1),
                                                                                                                        marginTop(top + 5),
                                                                                                                        optionsIsOpen(false)
 
@@ -86,34 +86,53 @@ void ComboBox::draw(Graphics &g, int x, int y, size_t z)
 
 void ComboBox::keyDown(int keyCode, char character)
 {
-    Button *temp = dynamic_cast<Button *>(Panel::controls[curr]);
-    for (auto &value : Panel::controls)
-        {
-            value->setTextColor(Color::White);
-            // temp->setBackgroundColor(Color::Blue);
+    Button *temp;
 
-            
-        }
     int size = Panel::controls.size();
-    temp->setTextColor(Color::Red);
+    // temp->setTextColor(Color::Red);
     // temp->setBackgroundColor(Color::White);
     if (keyCode == VK_UP)
-    {   
-        curr--;
+    {
+         if(curr == 0){
+            curr = size-1;
+        }
+        else{
+            --curr;
+        }
+        
+        for (auto &value : Panel::controls)
+        {
+            value->setTextColor(Color::White);
+        }
+        temp = dynamic_cast<Button *>(Panel::controls[curr]);
+        temp->setTextColor(Color::Red);
     }
     if (keyCode == VK_SPACE)
     {
+        temp = dynamic_cast<Button *>(Panel::controls[curr]);
         this->text.setValue(temp->getValue());
         this->optionsIsOpen = !this->optionsIsOpen;
         this->setShow(false);
         for (auto &value : Panel::controls)
         {
             value->setShow(false);
-            
         }
     }
-    if(keyCode == VK_DOWN){
-        curr++;
+    if (keyCode == VK_DOWN)
+    {
+        if(curr == size-1){
+            curr = 0;
+        }
+        else{
+            ++curr;
+        }
+        
+        for (auto &value : Panel::controls)
+        {
+            value->setTextColor(Color::White);
+        }
+        temp = dynamic_cast<Button *>(Panel::controls[curr]);
+        temp->setTextColor(Color::Red);
     }
 
     //   if(keyCode == VK_UP || keyCode == VK_NUMPAD8){
