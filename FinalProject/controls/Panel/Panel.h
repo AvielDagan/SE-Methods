@@ -20,7 +20,7 @@ class Panel : public Control {
 		virtual void keyDown(int keyCode, char charecter);
 		virtual void getAllControls(vector<Control*>* controls);
 
-    private:
+    protected:
         vector<Control*> controls;
         int focusIndex;
 

@@ -45,16 +45,16 @@ void Control::draw(Graphics &g, int x, int y, size_t z)
         int borderPadding = 2;
         if (getFocus() == this)
         {
-            borderPadding = 3;
-            // g.setForeground(Color::White);
-            // g.setBackground(Color::Black);
+            // borderPadding = 3;
+            g.setForeground(this->getBackgroundColor());
+            g.setBackground(this->getTextColor());
         }
-        // else
-        // {
+        else
+        {
 
         g.setForeground(getTextColor());
         g.setBackground(getBackgroundColor());
-        // }
+        }
         g.setCursorVisibility(false);
 
         border->drawBorder(g, x, y, width + borderPadding, height + borderPadding);
