@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Control/Control.h"
+#include "../Control/Control.hpp"
 #include <windows.h>
 #include "../Graphics/Graphics.hpp"
 

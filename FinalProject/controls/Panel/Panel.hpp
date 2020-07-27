@@ -1,6 +1,6 @@
 #pragma once
 #include "vector"
-#include "../../Common/Control/Control.h"
+#include "../../Common/Control/Control.hpp"
 #include "../BorderDrawer/BorderDrawer.hpp"
 
 using namespace std;

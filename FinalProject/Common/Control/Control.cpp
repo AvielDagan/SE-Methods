@@ -1,4 +1,4 @@
-#include "./Control.h"
+#include "./Control.hpp"
 #include "../../Controls/NullBorderDrawer/NullBorderDrawer.hpp"
 // #include "../Controls/MessageBox.h"
 #include <iostream>

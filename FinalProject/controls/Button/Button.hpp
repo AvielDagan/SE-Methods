@@ -1,8 +1,6 @@
 #pragma once
-
 #include <iostream>
-#include "../Label/Label.h"
-#include <vector>
+#include "../Label/Label.hpp"
 
 class Button : public Label
 {
