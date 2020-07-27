@@ -29,7 +29,7 @@ int main(int argc, char const *argv[])
     TextBox TB2(5, 0, 10, sbd, Color::White, Color::Cyan); // ?
     // std::cout << "printing" << std::endl;
     MessageAlert ma(0,0,20,sbd,dbd,Color::Cyan, Color::Black,"message","OK","CANCEL",&b);
-    NumericBox nb(0,0,100,0,dbd,Color::Cyan, Color::Black);
+    // NumericBox nb(0,0,100,0,dbd,Color::Cyan, Color::Black);
     // panel.addControl(&c);
     // panel.addControl(&b);
     panel.addControl(&ma);
@@ -37,7 +37,7 @@ int main(int argc, char const *argv[])
     panel.addControl(&TB2);
     // panel.addControl(&l);
     // panel.addControl(&ma);
-    panel.addControl(&nb);
+    // panel.addControl(&nb);
     // panel.addControl(&ll);
 
     // cout << "panel.getWidth() -> " << panel.getWidth() << endl;
