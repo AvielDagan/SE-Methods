@@ -2,18 +2,7 @@
 #include "../SingleBorderDrawer/SingleBorderDrawer.hpp"
 
 CheckList::CheckList(short left, short top, short width, BorderDrawer *border, Color textColor, Color backgroundColor,string labelText)
-    : Panel(left, top, border, textColor, backgroundColor), marginTop(top + 4), curr(-1), message(left, top, width, border, textColor, backgroundColor,labelText)
-{
-    // focusIndex = -1;
-}
-
-// CheckList::~CheckList()
-// {
-//     for (int i = 0; i < items.size(); ++i)
-//     {
-//         delete items[i];
-//     }
-// }
+    : Panel(left, top, border, textColor, backgroundColor), marginTop(top + 4), curr(-1), message(left, top, width, border, textColor, backgroundColor,labelText){}
 
 void CheckList::addToList(string item)
 {
@@ -21,11 +10,12 @@ void CheckList::addToList(string item)
     newItem->setCanClick(false);
     Panel::addControl(newItem);
     this->marginTop += 3;
-    // newItem->addListener(this);
-    // newItem->setSelectedString("[X] ");
-    // newItem->setUnselectedString("[ ] ");
-    // items.push_back(newItem);
-    // Control::setHeight(Control::getHeight() + 3);
+
+
+}
+CheckList::~CheckList() {
+    if(border)
+        delete border;
 }
 
 void CheckList::keyDown(int keyCode, char character)
@@ -33,8 +23,6 @@ void CheckList::keyDown(int keyCode, char character)
     CheckBox *temp;
 
     int size = Panel::controls.size();
-    // temp->setTextColor(Color::Red);
-    // temp->setBackgroundColor(Color::White);
     if (keyCode == VK_UP)
     {
         if (curr == 0)
@@ -55,9 +43,9 @@ void CheckList::keyDown(int keyCode, char character)
     }
     if (keyCode == VK_SPACE)
     {
-        temp = dynamic_cast<CheckBox *>(Panel::controls[curr]);
         if (curr == -1)
             ++curr;
+        temp = dynamic_cast<CheckBox *>(Panel::controls[curr]);
 
         temp->selectBox();
 
@@ -113,20 +101,6 @@ bool CheckList::removeSelectedItem(string item)
     return false;
 }
 
-// void CheckList::getSelectedItems(vector<string> &selected)
-// {
-//     for (int i = 0; i < selectedItems.size(); ++i)
-//     {
-//         selected.push_back(selectedItems[i]);
-//     }
-// }
-
-// void CheckList::invertColors(CheckBox *item)
-// {
-//     Color tempColor = item->getTextColor();
-//     item->setTextColor(item->getBackgroundColor());
-//     item->setBackgroundColor(tempColor);
-// }
 
 void CheckList::draw(Graphics &g, int x, int y, size_t z)
 {
@@ -139,96 +113,3 @@ void CheckList::draw(Graphics &g, int x, int y, size_t z)
         value->draw(g, value->getLeft(), value->getTop(), z);
     }
 }
-
-// void CheckList::keyDown(int keyCode, char charecter)
-// {
-//     if (getFocusIndex() != -1)
-//     {
-//         if (keyCode == VK_RETURN || keyCode == VK_SPACE)
-//         {
-//             if (items[focusIndex]->getSelected() == true)
-//             {
-//                 items[focusIndex]->setSelected(false);
-//                 removeSelectedItem(items[focusIndex]->getValue());
-//             }
-//             else
-//             {
-//                 items[focusIndex]->setSelected(true);
-//                 addSelectedItem(items[focusIndex]->getValue());
-//             }
-//             return;
-//         }
-//         if (keyCode == VK_UP || keyCode == VK_NUMPAD8)
-//         {
-//             if (focusIndex == 0)
-//             {
-//                 focusIndex = items.size() - 1;
-//             }
-//             else
-//             {
-//                 --focusIndex;
-//             }
-//             Control::setFocus(*items[focusIndex]);
-//             return;
-//         }
-//         if (keyCode == VK_DOWN || keyCode == VK_NUMPAD2)
-//         {
-//             if (focusIndex == items.size() - 1)
-//             {
-//                 focusIndex = 0;
-//             }
-//             else
-//             {
-//                 ++focusIndex;
-//             }
-//             Control::setFocus(*items[focusIndex]);
-//             return;
-//         }
-//     }
-// }
-
-// void CheckList::getAllControls(vector<Control *> *controls)
-// {
-//     for (int i = 0; i < items.size(); ++i)
-//     {
-//         controls->push_back(items[i]);
-//     }
-// }
-
-// int CheckList::getFocusIndex()
-// {
-//     Control *tempPtr = getFocus();
-//     for (int i = 0; i < items.size(); ++i)
-//     {
-//         if (items[i] == tempPtr)
-//         {
-//             focusIndex = i;
-//             return i;
-//         }
-//     }
-//     focusIndex = -1;
-//     return -1;
-// }
-
-// void CheckList::update(int x, int y, string s)
-// {
-//     for (int i = 0; i < items.size(); ++i)
-//     {
-//         if (s.compare(items[i]->getValue()) == 0)
-//         {
-//             if (items[i]->getSelected() == true)
-//             {
-//                 items[i]->setSelected(false);
-//                 removeSelectedItem(items[i]->getValue());
-//             }
-//             else
-//             {
-//                 items[i]->setSelected(true);
-//                 addSelectedItem(items[i]->getValue());
-//             }
-//             focusIndex = i;
-//             Control::setFocus(*items[i]);
-//             return;
-//         }
-//     }
-// }

@@ -15,13 +15,8 @@ public:
 	virtual ~Control() = 0;
 
 	static Control *getFocus() { return focusedControl; };
-	static void setFocus(Control &control)
-	{	
-		if ((focusedControl != &control) && (control.canGetFocus() /*|| (typeid(control) == typeid(semMessageBox))*/))
-		{
-			focusedControl = &control;
-		}
-	};
+	static void setFocus(Control &control);
+
 	static bool getMessageBoxLock() { return messageBoxLock; }; //! message box lock?
 	static void setMessageBoxLock(bool isLocked);				//! message box lock?
 

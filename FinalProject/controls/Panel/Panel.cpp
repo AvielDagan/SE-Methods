@@ -5,7 +5,13 @@ Panel::Panel(short left, short top, BorderDrawer* border, Color textColor, Color
         calculateWidthAndHeight();
 }
 
-Panel::~Panel() {}
+Panel::~Panel() {
+    for(auto *val : controls) {
+        delete val;
+    }
+    if(border)
+        delete border;
+}
 
 bool Panel::addControl(Control* control) {
     if(control != nullptr) {

@@ -17,11 +17,13 @@ Control::~Control()
     }
 }
 
-// void Control::setFocus(Control& control) {
-//     if((focusedControl != &control) && (control.canGetFocus() /*|| (typeid(control) == typeid(semMessageBox))*/)) {
-//         focusedControl = &control;
-//     }
-// }
+void Control::setFocus(Control &control)
+{
+    if ((focusedControl != &control) && (control.canGetFocus() /*|| (typeid(control) == typeid(semMessageBox))*/))
+    {
+        focusedControl = &control;
+    }
+};
 
 void Control::setMessageBoxLock(bool isLocked)
 { //! ?
@@ -52,8 +54,8 @@ void Control::draw(Graphics &g, int x, int y, size_t z)
         else
         {
 
-        g.setForeground(getTextColor());
-        g.setBackground(getBackgroundColor());
+            g.setForeground(getTextColor());
+            g.setBackground(getBackgroundColor());
         }
         g.setCursorVisibility(false);
 
@@ -71,6 +73,7 @@ void Control::drawFocus(Graphics &g, int x, int y, size_t z)
     border->drawBorder(g, x, y, width + borderPadding, height + borderPadding);
 }
 
-void Control::setShow(bool f) {
+void Control::setShow(bool f)
+{
     this->show = f;
 }
