@@ -8,7 +8,6 @@ class CheckList : public Panel
 
 protected:
     vector<string> selectedBoxes;
-    // int focusIndex;
     int marginTop;
     int curr;
     Label message;

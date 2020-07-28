@@ -63,7 +63,6 @@ void Panel::draw(Graphics& g, int x, int y, size_t z) {
             g.setForeground(controls[i]->getTextColor());
             g.setBackground(controls[i]->getBackgroundColor());
             controls[i]->draw(g, x + relativeX + 1, y + relativeY + 1, z);
-            // cout << "                                                                                                                                   #@!#@!#@!#@" << endl;
         }
     }
     if(z == 1 && this->getShow()) {
@@ -77,19 +76,7 @@ void Panel::draw(Graphics& g, int x, int y, size_t z) {
     }
 }
 
-void Panel::mousePressed(int x, int y, bool isLeft) {
-    int l = getLeft(), t = getTop(), w = getWidth(), h = getHeight();
-    if(x >= l && x <= l + w && y >= t && y <= t + h && isLeft) {
-        if(getMessageBoxLock() == false) {
-            for(int i = 0; i < controls.size(); ++i) {
-                controls[i]->mousePressed(x - l - 1, y - t - 1, isLeft);
-            }
-        }
-        else if(getFocusIndex() != -1) {
-            controls[focusIndex]->mousePressed(x - l - 1, y - t - 1, isLeft);
-        }
-    }
-}
+
 
 void Panel::keyDown(int keyCode, char charecter) {
     if(getFocusIndex() != -1) {

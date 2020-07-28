@@ -3,9 +3,8 @@
 #include "../Panel/Panel.hpp"
 #include "../Label/Label.hpp"
 #include "../Button/Button.hpp"
-// #include "../../Common/Control/Control.hpp"
 #include "../SingleBorderDrawer/SingleBorderDrawer.hpp"
-//need to call it in different name... it seemes MessageAlert already defined
+
 class MessageAlert : public Panel
 {
 private:
@@ -14,7 +13,6 @@ private:
     Button cancel;
     string returnValue;
     Button *showButton;
-    // Panel panel;
     bool show;
 
 public:

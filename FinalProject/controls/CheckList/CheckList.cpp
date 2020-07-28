@@ -36,10 +36,10 @@ void CheckList::keyDown(int keyCode, char character)
 
         for (auto &value : Panel::controls)
         {
-            value->setTextColor(Color::White);
+            value->setTextColor(textColor);
         }
         temp = dynamic_cast<CheckBox *>(Panel::controls[curr]);
-        temp->setTextColor(Color::Red);
+        temp->setTextColor(Color::White);
     }
     if (keyCode == VK_SPACE)
     {
@@ -69,10 +69,10 @@ void CheckList::keyDown(int keyCode, char character)
 
         for (auto &value : Panel::controls)
         {
-            value->setTextColor(Color::White);
+            value->setTextColor(textColor);
         }
         temp = dynamic_cast<CheckBox *>(Panel::controls[curr]);
-        temp->setTextColor(Color::Red);
+        temp->setTextColor(Color::White);
     }
 }
 bool CheckList::addSelectedItem(string item)

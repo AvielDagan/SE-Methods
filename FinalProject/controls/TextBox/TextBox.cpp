@@ -7,25 +7,11 @@ TextBox::TextBox(short left, short top, short width, BorderDrawer* border, Color
         SetConsoleCursorPosition(handle, currentCoord);
 }
 
-void TextBox:: mousePressed(int x, int y, bool isLeft){
-    int l = getLeft() + 1, t = getTop() + 1, w = getWidth(), h = getHeight();
-    if(x >= l && x <= l + w &&  y >= t && y <= t + h && isLeft) {
-        auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
-        if(x > value.length() + l)
-            x = value.length() + l;
-        else if(x == value.length() + l && value.length() != 0)
-            x = value.length() + l - 1;
 
-        currentCoord = { x, top + 1 };
-        SetConsoleCursorPosition(handle, currentCoord);
-    }
-    return;
-}
 
 void TextBox::setText(string text){ 
     if(text.length() <= width)
         value = text;
-    return; 
 }
 
 

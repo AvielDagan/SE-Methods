@@ -10,8 +10,7 @@ void RadioBox::keyDown(int keyCode, char character)
     CheckBox *temp;
 
     int size = Panel::controls.size();
-    // temp->setTextColor(Color::Red);
-    // temp->setBackgroundColor(Color::White);
+
     if (keyCode == VK_UP)
     {
         if (curr == 0)
@@ -25,10 +24,10 @@ void RadioBox::keyDown(int keyCode, char character)
 
         for (auto &value : Panel::controls)
         {
-            value->setTextColor(Color::White);
+            value->setTextColor(textColor);
         }
         temp = dynamic_cast<CheckBox *>(Panel::controls[curr]);
-        temp->setTextColor(Color::Red);
+        temp->setTextColor(Color::White);
     }
     if (keyCode == VK_SPACE)
     {
@@ -69,12 +68,9 @@ void RadioBox::keyDown(int keyCode, char character)
 
         for (auto &value : Panel::controls)
         {
-            value->setTextColor(Color::White);
+            value->setTextColor(textColor);
         }
         temp = dynamic_cast<CheckBox *>(Panel::controls[curr]);
-        temp->setTextColor(Color::Red);
+        temp->setTextColor(Color::White);
     }
 }
-// bool RadioBox::addSelectedItem(CheckBox cb)
-// {
-// }

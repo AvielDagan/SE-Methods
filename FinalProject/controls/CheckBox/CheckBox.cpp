@@ -18,7 +18,6 @@ void CheckBox::draw(Graphics &g, int x, int y, size_t z){
     string selected = "[X] ";
     string notSelected = "[ ] ";
     if(isSelected) {
-        
         setValue(selected + cbValue);
     } 
     else{ 

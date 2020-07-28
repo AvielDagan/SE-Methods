@@ -1,7 +1,6 @@
 #include "./NumericBox.hpp"
 
-NumericBox::NumericBox(short left, short top, int maxVal, int minVal, BorderDrawer *border, Color textColor, Color backgroundColor) : // Control(left, top,1,1, border, textColor, backgroundColor),
-                                                                                                                                      Panel(left, top, border, textColor, backgroundColor),
+NumericBox::NumericBox(short left, short top, int maxVal, int minVal, BorderDrawer *border, Color textColor, Color backgroundColor) : Panel(left, top, border, textColor, backgroundColor),
                                                                                                                                       currVal(Label(left + 7, top + 2, 3, border, textColor, backgroundColor, " 0 ")),
                                                                                                                                       add(Button(left + 14, top + 2, 1, border, textColor, backgroundColor, " + ", this)),
                                                                                                                                       subtract(Button(left + 2, top + 2, 1, border, textColor, backgroundColor, " - ", this)),
@@ -26,7 +25,6 @@ void NumericBox::increase()
         ++value;
         currVal.setValue(strVal + to_string(value));
     }
-
 }
 void NumericBox::decrease()
 {
@@ -37,7 +35,6 @@ void NumericBox::decrease()
         --value;
         currVal.setValue(strVal + to_string(value));
     }
-
 }
 
 int NumericBox::getVal()
@@ -48,10 +45,12 @@ int NumericBox::getVal()
 void NumericBox::setVal(int val)
 {
     string strVal = " ";
-    if (val > maxVal){
+    if (val > maxVal)
+    {
         val = maxVal;
     }
-    if (val < minVal){
+    if (val < minVal)
+    {
         val = minVal;
     }
 
@@ -86,10 +85,7 @@ bool NumericBox::setValue(int val)
 {
     value = val;
     return true;
-    
 }
-
-
 
 void NumericBox::draw(Graphics &g, int x, int y, size_t z)
 {
@@ -110,10 +106,14 @@ void NumericBox::draw(Graphics &g, int x, int y, size_t z)
     }
 }
 
-void NumericBox::notify(string text) {
-    if(text == " + ") {
+void NumericBox::notify(string text)
+{
+    if (text == " + ")
+    {
         increase();
-    } else{
+    }
+    else
+    {
         decrease();
     }
 }

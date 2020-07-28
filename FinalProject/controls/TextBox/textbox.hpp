@@ -16,7 +16,7 @@ public:
 
     void draw(Graphics& g, int x, int y, size_t z);
     bool canGetFocus(){ return true; }
-    void mousePressed(int x, int y, bool isLeft);
+
     void keyDown(int keyCode, char character);
     void setText(string text);
     string getText() { return value; }

@@ -17,8 +17,6 @@ public:
 	static Control *getFocus() { return focusedControl; };
 	static void setFocus(Control &control);
 
-	static bool getMessageBoxLock() { return messageBoxLock; }; //! message box lock?
-	static void setMessageBoxLock(bool isLocked);				//! message box lock?
 
 	virtual short getLeft() { return left; };
 	virtual short getTop() { return top; };
@@ -39,18 +37,13 @@ public:
 	void setShow(bool f);
 
 	virtual void draw(Graphics &g, int x, int y, size_t z);
-	virtual void drawFocus(Graphics &g, int x, int y, size_t z);
-	virtual void mousePressed(int x, int y, bool isLeft){};
 	virtual void keyDown(int keyCode, char charecter){};
 	virtual void getAllControls(vector<Control *> *controls){};
 	virtual bool canGetFocus() { return false; };
 	virtual int getFocusIndex() { return -1; };
-	
-	// virtual void notify(string text){};
 
 protected:
 	static Control *focusedControl;
-	static bool messageBoxLock;
 
 	short left;
 	short top;
