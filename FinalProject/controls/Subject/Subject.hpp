@@ -13,7 +13,6 @@ class Subject{
     public:
         void addObserver(Observer* observe);
         void actions(string text);
-        void listenKeyStroke();
         Subject();
         virtual ~Subject() = 0;
         

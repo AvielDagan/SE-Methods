@@ -5,7 +5,6 @@
 using namespace std;
 
 Control *Control::focusedControl = nullptr;
-bool Control::messageBoxLock = false;
 
 Control::Control(short left, short top, short width, short height, BorderDrawer *border, Color textColor, Color backgroundColor) : left(left), top(top), width(width), height(height), border(border), textColor(textColor), backgroundColor(backgroundColor), show(true) {}
 
@@ -17,16 +16,14 @@ Control::~Control()
     }
 }
 
-// void Control::setFocus(Control& control) {
-//     if((focusedControl != &control) && (control.canGetFocus() /*|| (typeid(control) == typeid(semMessageBox))*/)) {
-//         focusedControl = &control;
-//     }
-// }
+void Control::setFocus(Control &control)
+{
+    if ((focusedControl != &control) && (control.canGetFocus() /*|| (typeid(control) == typeid(semMessageBox))*/))
+    {
+        focusedControl = &control;
+    }
+};
 
-void Control::setMessageBoxLock(bool isLocked)
-{ //! ?
-    messageBoxLock = isLocked;
-}
 
 void Control::setBorder(BorderDrawer *border)
 {
@@ -45,15 +42,13 @@ void Control::draw(Graphics &g, int x, int y, size_t z)
         int borderPadding = 2;
         if (getFocus() == this)
         {
-            // borderPadding = 3;
             g.setForeground(this->getBackgroundColor());
             g.setBackground(this->getTextColor());
         }
         else
         {
-
-        g.setForeground(getTextColor());
-        g.setBackground(getBackgroundColor());
+            g.setForeground(getTextColor());
+            g.setBackground(getBackgroundColor());
         }
         g.setCursorVisibility(false);
 
@@ -61,16 +56,9 @@ void Control::draw(Graphics &g, int x, int y, size_t z)
     }
 }
 
-void Control::drawFocus(Graphics &g, int x, int y, size_t z)
+
+
+void Control::setShow(bool f)
 {
-    int borderPadding = 2;
-    g.setForeground(Color::White);
-    g.setBackground(Color::Black);
-    g.setCursorVisibility(false);
-
-    border->drawBorder(g, x, y, width + borderPadding, height + borderPadding);
-}
-
-void Control::setShow(bool f) {
     this->show = f;
 }

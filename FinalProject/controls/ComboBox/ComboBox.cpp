@@ -1,19 +1,15 @@
 #include "ComboBox.hpp"
 #include "../SingleBorderDrawer/SingleBorderDrawer.hpp"
+#include "../DoubleBorderDrawer/DoubleBorderDrawer.hpp"
 #include <iostream>
 using namespace std;
 
 ComboBox::ComboBox(short left, short top, short width, BorderDrawer *border, Color textColor, Color backgroundColor) : Panel(left + 5, top + 5, border, textColor, backgroundColor),
-                                                                                                                       // showButton(left + 15, top + 1, 1, new SingleBorderDrawer(), textColor, backgroundColor, " +",this),
                                                                                                                        text(left + 1, top + 1, 10, new SingleBorderDrawer(), textColor, backgroundColor, ""),
-                                                                                                                       message(left + 1, top + 1, 10, new SingleBorderDrawer(), textColor, backgroundColor, "ComboBox"),
+                                                                                                                       message(left + 2, top - 1, 10, new DoubleBorderDrawer(), Color::Cyan, Color::Black, "ComboBox"),
                                                                                                                        curr(-1),
                                                                                                                        marginTop(top + 5),
-                                                                                                                       optionsIsOpen(false)
-
-{
-    // this->setShow(false);
-}
+                                                                                                                       optionsIsOpen(false) {}
 
 void ComboBox::addToList(string toAdd)
 {
@@ -35,8 +31,6 @@ void ComboBox::notify(string s)
             for (auto &value : Panel::controls)
             {
                 value->setShow(false);
-                Button *temp = dynamic_cast<Button *>(value);
-                // temp->setCanClick(false);
             }
         }
         else
@@ -47,8 +41,6 @@ void ComboBox::notify(string s)
             for (auto &value : Panel::controls)
             {
                 value->setShow(true);
-                Button *temp = dynamic_cast<Button *>(value);
-                // temp->setCanClick(true);
             }
         }
     }
@@ -61,8 +53,6 @@ void ComboBox::notify(string s)
         for (auto &value : Panel::controls)
         {
             value->setShow(false);
-            Button *temp = dynamic_cast<Button *>(value);
-            // temp->setCanClick(false);
         }
     }
 
@@ -73,8 +63,9 @@ void ComboBox::draw(Graphics &g, int x, int y, size_t z)
 {
     if (z == 0)
     {
-        if(Control::getFocus() == this) {
-            message.draw(g,x,y,z);
+        if (Control::getFocus() == this)
+        {
+            message.draw(g, message.getLeft(), message.getTop(), z);
         }
         if (this->getShow())
         {
@@ -93,17 +84,17 @@ void ComboBox::keyDown(int keyCode, char character)
     Button *temp;
 
     int size = Panel::controls.size();
-    // temp->setTextColor(Color::Red);
-    // temp->setBackgroundColor(Color::White);
     if (keyCode == VK_UP)
     {
-         if(curr == 0){
-            curr = size-1;
+        if (curr == 0)
+        {
+            curr = size - 1;
         }
-        else{
+        else
+        {
             --curr;
         }
-        
+
         for (auto &value : Panel::controls)
         {
             value->setTextColor(Color::White);
@@ -113,7 +104,7 @@ void ComboBox::keyDown(int keyCode, char character)
     }
     if (keyCode == VK_SPACE)
     {
-        if(curr == -1)
+        if (curr == -1)
             ++curr;
         temp = dynamic_cast<Button *>(Panel::controls[curr]);
         this->text.setValue(temp->getValue());
@@ -126,13 +117,15 @@ void ComboBox::keyDown(int keyCode, char character)
     }
     if (keyCode == VK_DOWN)
     {
-        if(curr == size-1){
+        if (curr == size - 1)
+        {
             curr = 0;
         }
-        else{
+        else
+        {
             ++curr;
         }
-        
+
         for (auto &value : Panel::controls)
         {
             value->setTextColor(Color::White);
@@ -140,58 +133,4 @@ void ComboBox::keyDown(int keyCode, char character)
         temp = dynamic_cast<Button *>(Panel::controls[curr]);
         temp->setTextColor(Color::Red);
     }
-
-    //   if(keyCode == VK_UP || keyCode == VK_NUMPAD8){
-    //             if(focusIndex == 0) {
-    //                 focusIndex = items.size() - 1;
-    //             }
-    //             else {
-    //                 --focusIndex;
-    //             }
-    //             Control::setFocus(*items[focusIndex]);
-    //             return;
-    //         }
-    //         if(keyCode == VK_DOWN || keyCode == VK_NUMPAD2){
-    //             if(focusIndex == items.size() - 1) {
-    //                 focusIndex = 0;
-    //             }
-    //             else {
-    //                 ++focusIndex;
-    //             }
-    //             Control::setFocus(*items[focusIndex]);
-    //             return;
-
-
-    // Color tempColor;
-    // if(show){
-    //     if(keyCode == VK_RETURN || keyCode == VK_SPACE){
-    //         text.setValue(list[curr]->getValue());
-    //         show = false;
-    //         showButton.setValue(" +");
-    //         invertColor(list[curr]);
-    //         curr = 0;
-    //         return;
-    //     }
-
-    //     if(keyCode == VK_UP || keyCode == VK_NUMPAD8){
-    //         if(curr == 0)
-    //             return;
-
-    //         invertColor(list[curr]);
-    //         --curr;
-    //         invertColor(list[curr]);
-    //         return;
-    //     }
-
-    //     if(keyCode == VK_DOWN || keyCode == VK_NUMPAD2){
-    //         if(curr + 1 == list.size())
-    //             return;
-
-    //         invertColor(list[curr]);
-    //         ++curr;
-    //         invertColor(list[curr]);
-    //         return;
-    //     }
-    // }
-    // return;
 }

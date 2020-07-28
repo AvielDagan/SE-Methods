@@ -1,19 +1,16 @@
 #include "./NumericBox.hpp"
 
-NumericBox::NumericBox(short left, short top, int maxVal, int minVal, BorderDrawer *border, Color textColor, Color backgroundColor) : 
-    Panel(left, top, border, textColor, backgroundColor),
-    title(Label(left + 7, top + 2, 1, border, textColor, backgroundColor, " 0")),
-    add(Button(left + 12, top + 2, 1, border, textColor, backgroundColor, " + ",NULL)),
-    subtract(Button(left + 2, top + 2, 1, border, textColor, backgroundColor, " - ",NULL)),
-    maxVal(maxVal),
-    minVal(minVal)
+NumericBox::NumericBox(short left, short top, int maxVal, int minVal, BorderDrawer *border, Color textColor, Color backgroundColor) : Panel(left, top, border, textColor, backgroundColor),
+                                                                                                                                      currVal(Label(left + 7, top + 2, 3, border, textColor, backgroundColor, " 0 ")),
+                                                                                                                                      add(Button(left + 14, top + 2, 1, border, textColor, backgroundColor, " + ", this)),
+                                                                                                                                      subtract(Button(left + 2, top + 2, 1, border, textColor, backgroundColor, " - ", this)),
+                                                                                                                                      maxVal(maxVal),
+                                                                                                                                      minVal(minVal),
+                                                                                                                                      value(0)
 {
     Panel::addControl(&this->add);
     Panel::addControl(&this->subtract);
-    Panel::addControl(&this->title);
-    auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    currentCoord = {left + 1 , top + 1};
-    SetConsoleCursorPosition(handle, currentCoord);
+    Panel::addControl(&this->currVal);
 }
 
 NumericBox::~NumericBox()
@@ -21,46 +18,43 @@ NumericBox::~NumericBox()
 }
 void NumericBox::increase()
 {
-    stringstream str(title.getValue());
-    int numericVal;
-    str >> numericVal;// convert string to int
-    // int numericVal = atoi(title.getValue().c_str());
-    if (numericVal >= maxVal)
-        return;
+    string strVal = " ";
 
-    ++numericVal;
-    str << numericVal; // return new int to stringstream str
-    title.setValue(str.str()); //setValue with new string
+    if (value < maxVal)
+    {
+        ++value;
+        currVal.setValue(strVal + to_string(value));
+    }
 }
 void NumericBox::decrease()
 {
-    stringstream str(title.getValue());
-    int numericVal;
-    str >> numericVal;// convert string to int
-    // int numericVal = atoi(title.getValue().c_str());
-    if (numericVal <= minVal)
-        return;
-    --numericVal;
-    str << numericVal; // return new int to stringstream str
-    title.setValue(str.str()); //setValue with new string
+    string strVal = " ";
+
+    if (value > minVal)
+    {
+        --value;
+        currVal.setValue(strVal + to_string(value));
+    }
 }
 
 int NumericBox::getVal()
 {
-    return atoi(title.getValue().c_str());
+    return value;
 }
 
 void NumericBox::setVal(int val)
 {
-    if (val > maxVal){
+    string strVal = " ";
+    if (val > maxVal)
+    {
         val = maxVal;
     }
-    if (val < minVal){
+    if (val < minVal)
+    {
         val = minVal;
     }
-    stringstream str("");
-    str << val;
-    title.setValue(str.str());
+
+    currVal.setValue(strVal + to_string(value));
 }
 
 int NumericBox::getMin()
@@ -69,10 +63,10 @@ int NumericBox::getMin()
 }
 int NumericBox::setMin(int min)
 {
-    if (min > this->maxVal)
+    if (min > maxVal)
         return -1;
 
-    this->minVal = min;
+    minVal = min;
     return 0;
 }
 int NumericBox::getMax()
@@ -81,39 +75,16 @@ int NumericBox::getMax()
 }
 int NumericBox::setMax(int max)
 {
-    if (max < this->minVal)
+    if (max < minVal)
         return -1;
 
-    this->maxVal = max;
+    maxVal = max;
     return 0;
 }
-bool NumericBox::setValue(int)
+bool NumericBox::setValue(int val)
 {
+    value = val;
     return true;
-} 
-
-void NumericBox::keyDown(int keyCode, char charecter){
-    int textWidth = title.getValue().length();
-    auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
-
-    if(keyCode == VK_LEFT || keyCode == VK_RIGHT){
-        auto offset = currentCoord.X - this->left;
-        if(offset - 1 > 0 && keyCode == VK_LEFT){
-            currentCoord = { currentCoord.X - 1, currentCoord.Y };
-            SetConsoleCursorPosition(handle, currentCoord);
-            return;
-        }
-
-        if(offset - 1 < textWidth && keyCode == VK_RIGHT){
-            currentCoord = { currentCoord.X + 1, currentCoord.Y };
-            SetConsoleCursorPosition(handle, currentCoord);
-            return;
-        }
-    }
-    if(keyCode == VK_RETURN){
-        //get focus - should be on "-" or "+"
-        increase();
-    }
 }
 
 void NumericBox::draw(Graphics &g, int x, int y, size_t z)
@@ -121,11 +92,9 @@ void NumericBox::draw(Graphics &g, int x, int y, size_t z)
     short relativeX, relativeY;
     if (z == 0)
     {
-        Control::draw(g, x, y, z);
-
-        relativeX = title.getLeft();
-        relativeY = title.getTop();
-        title.draw(g, relativeX + 1, relativeY + 1, z);
+        relativeX = currVal.getLeft();
+        relativeY = currVal.getTop();
+        currVal.draw(g, relativeX + 1, relativeY + 1, z);
 
         relativeX = add.getLeft();
         relativeY = add.getTop();
@@ -134,5 +103,17 @@ void NumericBox::draw(Graphics &g, int x, int y, size_t z)
         relativeX = subtract.getLeft();
         relativeY = subtract.getTop();
         subtract.draw(g, relativeX + 1, relativeY + 1, z);
+    }
+}
+
+void NumericBox::notify(string text)
+{
+    if (text == " + ")
+    {
+        increase();
+    }
+    else
+    {
+        decrease();
     }
 }

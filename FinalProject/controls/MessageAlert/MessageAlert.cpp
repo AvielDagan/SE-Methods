@@ -8,7 +8,6 @@ MessageAlert::MessageAlert(short left, short top, short width,BorderDrawer* butt
     cancel(Button(width - cancel.size() - 2, 4,5,  buttonBorder, Color::White, Color::Red, cancel,this)),
     showButton(showButton) 
     {
-        // Panel:addControl(this);
         Panel::addControl(&this->message);
         Panel::addControl(&this->okBtn);
         Panel::addControl(&this->cancel);
@@ -32,12 +31,12 @@ void MessageAlert::setShowButton(Button *button) {
 
 void MessageAlert::draw(Graphics& g, int x, int y, size_t z) {
     int relativeX, relativeY;
-    // cout << "                                                                                                                                                                                   @!@!" << endl;
+    
     if(z == 0 && this->show == true) {
         Panel::draw(g, x , y, z);
         relativeX = message.getLeft();
         relativeY = message.getTop();
-        // cout << "                                                                                                                                                                                   @!@!" << endl;
+        
         if(message.getShow()) 
             message.draw(g, x + relativeX + 1, y + relativeY + 1, z);
         relativeX = okBtn.getLeft();
@@ -56,6 +55,7 @@ void MessageAlert::notify(string text) {
     if(text == "OK") {
         cancel.setShow(false);
         cancel.setCanClick(false);
+        returnValue = text;
     }
 
     if(text == "CANCEL"){
@@ -65,5 +65,8 @@ void MessageAlert::notify(string text) {
         okBtn.setShow(false);
         okBtn.setCanClick(false);
         message.setShow(false);
+        returnValue = text;
     }
+
+    returnValue = "";
 } 

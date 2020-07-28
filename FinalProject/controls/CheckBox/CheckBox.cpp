@@ -18,12 +18,10 @@ void CheckBox::draw(Graphics &g, int x, int y, size_t z){
     string selected = "[X] ";
     string notSelected = "[ ] ";
     if(isSelected) {
-        
         setValue(selected + cbValue);
     } 
     else{ 
         setValue(notSelected + cbValue);
     }
     Label::draw(g,left,top,z);
-    // title.draw(g,left + 5,top,z);
 }

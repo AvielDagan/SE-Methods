@@ -24,18 +24,18 @@ int main(int argc, char const *argv[])
     Panel panel(0, 0, dbd, Color::White, Color::Black);
     // Label l(0, 15, 10, dbd, Color::Cyan, Color::Black, "test label");
     // Label ll(10, 10, 10, 10, dbd, Color::Cyan, Color::Black, "test label");
-    Button b(5, 5, 10, dbd, Color::Cyan, Color::Black, "test Button", NULL);
-    Button c(10, 10, 10, dbd, Color::Cyan, Color::Black, "test Button2", NULL);
+    Button b(5, 5, 10, dbd, Color::Cyan, Color::Black, "", NULL);
+    // Button c(10, 10, 10, dbd, Color::Cyan, Color::Black, "test Button2", NULL);
     TextBox TB(30, 0, 10, sbd, Color::White, Color::Cyan); // ?
-    TextBox TB2(5, 0, 10, sbd, Color::White, Color::Cyan); // ?
-    ComboBox CB(40, 10,10, sbd, Color::White, Color::Blue);
-    Button plus(55, 11,1, dbd, Color::White, Color::Blue, " +",&CB);
-    CheckList chkList(55,15,10,dbd,Color::Cyan, Color::Black, "CheckList");
+    // TextBox TB2(5, 0, 10, sbd, Color::White, Color::Cyan); // ?
+    ComboBox CB(40, 8,10, sbd, Color::White, Color::Blue);
+    Button plus(55, 9,1, dbd, Color::White, Color::Blue, " +",&CB);
+    CheckList chkList(45,18,10,dbd,Color::Cyan, Color::Black, "CheckList");
     chkList.addToList("test1");
     chkList.addToList("test2");
     chkList.addToList("test3");
 
-    RadioBox rdb(25,15,10,dbd,Color::Cyan, Color::Black, "RadioBox");
+    RadioBox rdb(10,18,10,dbd,Color::Cyan, Color::Black, "RadioBox");
     rdb.addToList("1");
     rdb.addToList("2");
     rdb.addToList("3");
@@ -48,7 +48,7 @@ int main(int argc, char const *argv[])
     CB.addToList("Itay");
     // std::cout << "printing" << std::endl;
     MessageAlert ma(0, 0, 20, sbd, dbd, Color::Cyan, Color::Black, "message", "OK", "CANCEL", &b);
-    // NumericBox nb(0, 0, 100, 0, dbd, Color::Cyan, Color::Black);
+    NumericBox nb(25, 28, 100, -100, dbd, Color::Cyan, Color::Black);
     // CheckList cl(60, 10, 20, dbd, Color::Orange, Color::White);
     // cl.addToList("avielllll");
     // cl.addToList("itayyyyyy");
@@ -58,12 +58,12 @@ int main(int argc, char const *argv[])
     // panel.addControl(&b);
     panel.addControl(&ma);
     panel.addControl(&TB);
-    panel.addControl(&TB2);
+    // panel.addControl(&TB2);
     panel.addControl(&plus);
     panel.addControl(&CB);
     panel.addControl(&chkList);
     panel.addControl(&rdb);
-    // panel.addControl(&nb);
+    panel.addControl(&nb);
     // panel.addControl(&cl);
     // panel.addControl(&ll);
 

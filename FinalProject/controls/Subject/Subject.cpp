@@ -21,8 +21,4 @@ void Subject::actions(string text)
         value->notify(text);
     }
 }
-// not sure if need this method 
-void Subject::listenKeyStroke()
-{
 
-} //while(1)
