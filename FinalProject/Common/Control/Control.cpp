@@ -1,6 +1,5 @@
 #include "./Control.hpp"
 #include "../../Controls/NullBorderDrawer/NullBorderDrawer.hpp"
-// #include "../Controls/MessageBox.h"
 #include <iostream>
 using namespace std;
 
@@ -18,12 +17,11 @@ Control::~Control()
 
 void Control::setFocus(Control &control)
 {
-    if ((focusedControl != &control) && (control.canGetFocus() /*|| (typeid(control) == typeid(semMessageBox))*/))
+    if ((focusedControl != &control) && (control.canGetFocus()))
     {
         focusedControl = &control;
     }
 };
-
 
 void Control::setBorder(BorderDrawer *border)
 {
@@ -55,8 +53,6 @@ void Control::draw(Graphics &g, int x, int y, size_t z)
         border->drawBorder(g, x, y, width + borderPadding, height + borderPadding);
     }
 }
-
-
 
 void Control::setShow(bool f)
 {

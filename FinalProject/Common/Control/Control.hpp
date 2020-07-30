@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-#include <typeinfo>
 #include "../Graphics/Graphics.hpp"
 #include "../../Controls/BorderDrawer/BorderDrawer.hpp"
 #include "../../controls/Observer/Observer.hpp"

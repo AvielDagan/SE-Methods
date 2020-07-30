@@ -44,17 +44,6 @@ void ComboBox::notify(string s)
             }
         }
     }
-    else
-    {
-
-        this->text.setValue(s);
-        this->optionsIsOpen = !this->optionsIsOpen;
-        this->setShow(false);
-        for (auto &value : Panel::controls)
-        {
-            value->setShow(false);
-        }
-    }
 
     return;
 }
