@@ -22,13 +22,13 @@ int main(int argc, char const *argv[])
 
     Panel panel(0, 0, dbd, Color::White, Color::Black);
     Button b(5, 5, 10, dbd, Color::Cyan, Color::Black, "", NULL);
-    TextBox TB(30, 0, 10, sbd, Color::White, Color::Cyan);
-    ComboBox CB(40, 8,10, sbd, Color::White, Color::Blue);
-    Button plus(55, 9,1, dbd, Color::White, Color::Blue, " +",&CB);
-    CheckList chkList(45,18,10,dbd,Color::Cyan, Color::Black, "CheckList");
-    RadioBox rdb(10,18,10,dbd,Color::Cyan, Color::Black, "RadioBox");
+    TextBox tb(30, 0, 10, sbd, Color::White, Color::Cyan);
+    ComboBox cb(40, 8,10, sbd, Color::White, Color::Blue);
+    Button plus(55, 9,1, dbd, Color::White, Color::Blue, " +",&cb);
+    CheckList chkList(45,15,10,dbd,Color::Cyan, Color::Black, "CheckList");
+    RadioBox rdb(10,15,10,dbd,Color::Cyan, Color::Black, "RadioBox");
     MessageAlert ma(0, 0, 20, sbd, dbd, Color::Cyan, Color::Black, "message", "OK", "CANCEL", &b);
-    NumericBox nb(25, 28, 100, -100, dbd, Color::Cyan, Color::Black);
+    NumericBox nb(25, 26, 100, -100, dbd, Color::Cyan, Color::Black);
 
     chkList.addToList("test1");
     chkList.addToList("test2");
@@ -38,15 +38,15 @@ int main(int argc, char const *argv[])
     rdb.addToList("2");
     rdb.addToList("3");
 
-	CB.addToList("Tal");
-	CB.addToList("Tomer");
-	CB.addToList("Aviel");
-    CB.addToList("Itay");
+	cb.addToList("Tal");
+	cb.addToList("Tomer");
+	cb.addToList("Aviel");
+    cb.addToList("Itay");
    
     panel.addControl(&ma);
-    panel.addControl(&TB);
+    panel.addControl(&tb);
     panel.addControl(&plus);
-    panel.addControl(&CB);
+    panel.addControl(&cb);
     panel.addControl(&chkList);
     panel.addControl(&rdb);
     panel.addControl(&nb);
