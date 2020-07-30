@@ -1,9 +1,9 @@
 By: 
 
 Tal Adivi - 204329775
-Tomer Bar - 30
-Itay Gershman - 
-Aviel Dagan -
+Tomer Bar - 305171159
+Itay Gershman - 312491798
+Aviel Dagan - 203345061
 
 
 
